@@ -31,7 +31,7 @@ function BlockedUsers() {
       const blockedIds = data.user.blockedUsers || [];
 
       const usersResponse = await fetch(
-        "http://192.168.43.245:5000/api/users",
+        "https://social-media-backend-9fag.onrender.com/api/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ function BlockedUsers() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://192.168.43.245:5000/api/users/unblock/${userId}`,
+        `https://social-media-backend-9fag.onrender.com/api/users/unblock/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -136,7 +136,7 @@ function BlockedUsers() {
               <img
                 src={
                   user.profilePic
-                    ? `http://192.168.43.245:5000${user.profilePic}`
+                    ? `https://social-media-backend-9fag.onrender.com${user.profilePic}`
                     : "https://randomuser.me/api/portraits/men/1.jpg"
                 }
                 alt={user.name}

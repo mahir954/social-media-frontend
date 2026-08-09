@@ -49,7 +49,7 @@ function Explore() {
     const token = localStorage.getItem("token");
     try{
       const isLiked = likedposts.includes(postId);
-      const response = await fetch(`http://192.168.43.245:5000/api/posts/${postId}/${isLiked ? "unlike" : "like"}`, {
+      const response = await fetch(`https://social-media-backend-9fag.onrender.com/api/posts/${postId}/${isLiked ? "unlike" : "like"}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -86,7 +86,7 @@ const handleFollow = async (userId) => {
     );
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/users/${userId}/${
+      `https://social-media-backend-9fag.onrender.com/api/users/${userId}/${
         isFollowing ? "unfollow" : "follow"
       }`,
       {
@@ -131,7 +131,7 @@ const addComment = async (postId, text) => {
 
   try {
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${postId}/comment`,
+      `https://social-media-backend-9fag.onrender.com/api/posts/${postId}/comment`,
       {
         method: "POST",
         headers: {
@@ -157,7 +157,7 @@ const addComment = async (postId, text) => {
 const fetchComments = async (postId) => {
   try {
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${postId}/comments`
+      `https://social-media-backend-9fag.onrender.com/api/posts/${postId}/comments`
     );
 
     const data = await response.json();
@@ -177,7 +177,7 @@ const deleteComment = async (postId, commentId) => {
 
   try {
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${postId}/comment/${commentId}`,
+      `https://social-media-backend-9fag.onrender.com/api/posts/${postId}/comment/${commentId}`,
       {
         method: "DELETE",
         headers: {
@@ -207,7 +207,7 @@ const editComment = async (postId, commentId, oldText) => {
 
   try {
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${postId}/comment/${commentId}`,
+      `https://social-media-backend-9fag.onrender.com/api/posts/${postId}/comment/${commentId}`,
       {
         method: "PUT",
         headers: {
@@ -263,7 +263,7 @@ const editComment = async (postId, commentId, oldText) => {
     <img
       src={
         post.user?.profilePic
-      ? `http://192.168.43.245:5000${post.user.profilePic}`
+      ? `https://social-media-backend-9fag.onrender.com${post.user.profilePic}`
       : "https://randomuser.me/api/portraits/men/1.jpg"
   }
   alt={post.user?.name}
@@ -303,7 +303,7 @@ const editComment = async (postId, commentId, oldText) => {
             <p>{post.content}</p>
             {post.image && (
               <img
-              src={`http://192.168.43.245:5000${post.image}`}
+              src={`https://social-media-backend-9fag.onrender.com${post.image}`}
               alt="Post"
               className="explore-post-image"
               />
@@ -326,7 +326,7 @@ const editComment = async (postId, commentId, oldText) => {
     <img
       src={
         comment.user?.profilePic
-          ? `http://192.168.43.245:5000${comment.user.profilePic}`
+          ? `https://social-media-backend-9fag.onrender.com${comment.user.profilePic}`
           : "https://randomuser.me/api/portraits/men/1.jpg"
       }
       alt={comment.user?.name}

@@ -39,7 +39,7 @@ function MusicUpload() {
       }
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/music/upload",
+        "https://social-media-backend-9fag.onrender.com/api/music/upload",
         {
           method: "POST",
           body: formData,

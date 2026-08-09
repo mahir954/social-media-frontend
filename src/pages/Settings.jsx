@@ -166,7 +166,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
           const token = localStorage.getItem("token");
 
           const response = await fetch(
-            "http://192.168.43.245:5000/api/auth/change-password",
+            "https://social-media-backend-9fag.onrender.com/api/auth/change-password",
             {
               method: "PUT",
               headers: {

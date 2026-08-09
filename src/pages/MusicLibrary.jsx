@@ -12,7 +12,7 @@ function MusicLibrary() {
   const fetchMusic = async () => {
     try {
       const response = await fetch(
-        "http://192.168.43.245:5000/api/music"
+        "https://social-media-backend-9fag.onrender.com/api/music"
       );
 
       const data = await response.json();
@@ -85,7 +85,7 @@ function MusicLibrary() {
           <audio
   controls
   preload="metadata"
-  src={`http://192.168.43.245:5000${music.audioUrl}`}
+  src={`https://social-media-backend-9fag.onrender.com${music.audioUrl}`}
   onLoadedMetadata={(e) => {
     console.log("Audio Duration:", e.target.duration);
   }}
@@ -118,7 +118,7 @@ function MusicLibrary() {
 
     try {
       const response = await fetch(
-        `http://192.168.43.245:5000/api/music/${music._id}`,
+        `https://social-media-backend-9fag.onrender.com/api/music/${music._id}`,
         {
           method: "DELETE",
         }

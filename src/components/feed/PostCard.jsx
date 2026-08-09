@@ -73,7 +73,7 @@ marginBottom: "10px",
 <img
 src={
 item.user?.profilePic
-? `http://192.168.43.245:5000${item.user.profilePic}`
+? `https://social-media-backend-9fag.onrender.com${item.user.profilePic}`
 : "https://randomuser.me/api/portraits/men/1.jpg"
 }
 alt="Profile"
@@ -93,7 +93,7 @@ marginBottom: "10px",
   {/* POST IMAGE */}
   {item.image && (
     <img
-      src={`http://192.168.43.245:5000${item.image}`}
+      src={`https://social-media-backend-9fag.onrender.com${item.image}`}
       alt="Post"
       style={{
         width: "100%",
@@ -183,7 +183,7 @@ marginBottom: "10px",
       }}
     >
       <source
-        src={`http://192.168.43.245:5000${item.music.audioUrl}`}
+        src={`https://social-media-backend-9fag.onrender.com${item.music.audioUrl}`}
         type="audio/mpeg"
       />
     </audio>

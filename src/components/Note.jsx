@@ -38,7 +38,7 @@ const [replyNoteId, setReplyNoteId] = useState(null);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/notes",
+        "https://social-media-backend-9fag.onrender.com/api/notes",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ setNotes(
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/notes",
+        "https://social-media-backend-9fag.onrender.com/api/notes",
         {
           method: "POST",
           headers: {
@@ -119,7 +119,7 @@ setNotes(
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/notes/${noteId}`,
+      `https://social-media-backend-9fag.onrender.com/api/notes/${noteId}`,
       {
         method: "DELETE",
         headers: {
@@ -141,7 +141,7 @@ const updateNote = async () => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/notes/${myNote._id}`,
+      `https://social-media-backend-9fag.onrender.com/api/notes/${myNote._id}`,
       {
         method: "PUT",
         headers: {
@@ -171,7 +171,7 @@ const handleReply = async (noteId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/notes/${noteId}/reply`,
+      `https://social-media-backend-9fag.onrender.com/api/notes/${noteId}/reply`,
       {
         method: "POST",
         headers: {
@@ -203,7 +203,7 @@ const handleLike = async (noteId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/notes/${noteId}/like`,
+      `https://social-media-backend-9fag.onrender.com/api/notes/${noteId}/like`,
       {
         method: "POST",
         headers: {
@@ -248,7 +248,7 @@ const handleLike = async (noteId) => {
       <img
       src={
         myNote.user?.profilePic
-          ? `http://192.168.43.245:5000${myNote.user.profilePic}`
+          ? `https://social-media-backend-9fag.onrender.com${myNote.user.profilePic}`
           : "https://randomuser.me/api/portraits/men/1.jpg"
       }
       alt="profile"
@@ -300,7 +300,7 @@ const handleLike = async (noteId) => {
             <img
               src={
                 item.user?.profilePic
-                ? `http://192.168.43.245:5000${item.user.profilePic}`
+                ? `https://social-media-backend-9fag.onrender.com${item.user.profilePic}`
                 : "https://randomuser.me/api/portraits/men/1.jpg"
               }
               alt="user"

@@ -21,7 +21,7 @@ const [selectedMusic, setSelectedMusic] = useState(null);
       }
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/posts",
+        "https://social-media-backend-9fag.onrender.com/api/posts",
         {
           method: "GET",
           headers: {
@@ -59,7 +59,7 @@ const [selectedMusic, setSelectedMusic] = useState(null);
   const fetchMusic = async () => {
     try {
       const response = await fetch(
-        "http://192.168.43.245:5000/api/music"
+        "https://social-media-backend-9fag.onrender.com/api/music"
       );
 
       const data = await response.json();
@@ -96,7 +96,7 @@ const [selectedMusic, setSelectedMusic] = useState(null);
           formData.append("musicId", selectedMusic._id);
         }
       }
-        const response = await fetch("http://192.168.43.245:5000/api/posts", {
+        const response = await fetch("https://social-media-backend-9fag.onrender.com/api/posts", {
             method: "POST",
             headers: {
                 
@@ -161,7 +161,7 @@ const [selectedMusic, setSelectedMusic] = useState(null);
     }
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${selectedPost._id}`,
+      `https://social-media-backend-9fag.onrender.com/api/posts/${selectedPost._id}`,
       {
         method: "DELETE",
         headers: {
@@ -202,9 +202,9 @@ const [selectedMusic, setSelectedMusic] = useState(null);
         }
         const selectedPost = posts[index];
         const isLiked = selectedPost.likes && selectedPost.likes.some((userId) => userId === localStorage.getItem("userId"));
-        const url = isLiked ? `http://192.168.43.245:5000/api/posts/${selectedPost._id}/unlike`
+        const url = isLiked ? `https://social-media-backend-9fag.onrender.com/api/posts/${selectedPost._id}/unlike`
             :
-        `http://192.168.43.245:5000/api/posts/${selectedPost._id}/like`;
+        `https://social-media-backend-9fag.onrender.com/api/posts/${selectedPost._id}/like`;
         const response = await fetch(url, {
           method: "POST",
           headers: {
@@ -249,7 +249,7 @@ const [selectedMusic, setSelectedMusic] = useState(null);
     }
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${selectedPost._id}`,
+      `https://social-media-backend-9fag.onrender.com/api/posts/${selectedPost._id}`,
       {
         method: "PUT",
         headers: {
@@ -307,7 +307,7 @@ const [selectedMusic, setSelectedMusic] = useState(null);
 
     const selectedPost = posts[index];
 
-    const response = await fetch(`http://192.168.43.245:5000/api/posts/${selectedPost._id}/comment`,
+    const response = await fetch(`https://social-media-backend-9fag.onrender.com/api/posts/${selectedPost._id}/comment`,
       {
         method: "POST",
         headers: {
@@ -350,7 +350,7 @@ const handleDeleteComment = async (postIndex, commentId) => {
     const post = posts[postIndex];
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${post._id}/comment/${commentId}`,
+      `https://social-media-backend-9fag.onrender.com/api/posts/${post._id}/comment/${commentId}`,
       {
         method: "DELETE",
         headers: {
@@ -403,7 +403,7 @@ const handleDeleteComment = async (postIndex, commentId) => {
     const post = posts[postIndex];
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/posts/${post._id}/comment/${commentId}`,
+      `https://social-media-backend-9fag.onrender.com/api/posts/${post._id}/comment/${commentId}`,
       {
         method: "PUT",
         headers: {

@@ -64,7 +64,7 @@ const [activeReelId, setActiveReelId] = useState(null);
   const fetchReels = async () => {
   try {
     const response = await fetch(
-      "http://192.168.43.245:5000/api/reels",
+      "https://social-media-backend-9fag.onrender.com/api/reels",
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -80,7 +80,7 @@ const [activeReelId, setActiveReelId] = useState(null);
 const token = localStorage.getItem("token");
 
 const profileResponse = await fetch(
-  "http://192.168.43.245:5000/api/auth/profile",
+  "https://social-media-backend-9fag.onrender.com/api/auth/profile",
   {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ const fetchMusic = async () => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://192.168.43.245:5000/api/music",
+      "https://social-media-backend-9fag.onrender.com/api/music",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -171,8 +171,8 @@ const handleFollowToggle = async (userId) => {
     const isFollowing = followingStatus[userId];
 
     const endpoint = isFollowing
-      ? `http://192.168.43.245:5000/api/users/${userId}/unfollow`
-      : `http://192.168.43.245:5000/api/users/${userId}/follow`;
+      ? `https://social-media-backend-9fag.onrender.com/api/users/${userId}/unfollow`
+      : `https://social-media-backend-9fag.onrender.com/api/users/${userId}/follow`;
 
     const response = await fetch(endpoint, {
       method: "POST",
@@ -201,7 +201,7 @@ const handleLikeReel = async (reelId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}/like`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}/like`,
       {
         method: "PUT",
         headers: {
@@ -233,7 +233,7 @@ const handleSaveReel = async (reelId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}/save`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}/save`,
       {
         method: "PUT",
         headers: {
@@ -266,7 +266,7 @@ const handleSaveReel = async (reelId) => {
 const fetchReelLikes = async (reelId) => {
   try {
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}/likes`
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}/likes`
     );
 
     const data = await response.json();
@@ -298,7 +298,7 @@ const handleViewReel = async (reelId) => {
 
   try {
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}/view`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}/view`,
       {
         method: "PUT",
       }
@@ -338,7 +338,7 @@ const handleAddComment = async (reelId) => {
 const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}/comment`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}/comment`,
       {
         method: "POST",
         headers: {
@@ -379,7 +379,7 @@ const handleDeleteComment = async (reelId, commentId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}/comment/${commentId}`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}/comment/${commentId}`,
       {
         method: "DELETE",
         headers: {
@@ -416,7 +416,7 @@ const handleDeleteReel = async (reelId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}`,
       {
         method: "DELETE",
         headers: {
@@ -447,7 +447,7 @@ const handleEditReel = async (reelId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}`,
       {
         method: "PUT",
         headers: {
@@ -488,7 +488,7 @@ const handleEditComment = async (reelId, commentId) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/reels/${reelId}/comment/${commentId}`,
+      `https://social-media-backend-9fag.onrender.com/api/reels/${reelId}/comment/${commentId}`,
       {
         method: "PUT",
         headers: {
@@ -537,7 +537,7 @@ const handleEditComment = async (reelId, commentId) => {
 }
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/reels",
+        "https://social-media-backend-9fag.onrender.com/api/reels",
         {
           method: "POST",
           headers: {
@@ -733,7 +733,7 @@ const handleEditComment = async (reelId, commentId) => {
         >
           {music.coverImage && (
   <img
-    src={`http://192.168.43.245:5000${music.coverImage}`}
+    src={`https://social-media-backend-9fag.onrender.com${music.coverImage}`}
     alt={music.title}
     style={{
       width: "50px",
@@ -756,7 +756,7 @@ const handleEditComment = async (reelId, commentId) => {
   {music.audioUrl && (
     <audio
       controls
-      src={`http://192.168.43.245:5000${music.audioUrl}`}
+      src={`https://social-media-backend-9fag.onrender.com${music.audioUrl}`}
       onPlay={(e) => {
     document.querySelectorAll("audio").forEach((audio) => {
       if (audio !== e.target) {
@@ -866,7 +866,7 @@ const handleEditComment = async (reelId, commentId) => {
   <img
     src={
       reel.user?.profilePic
-        ? `http://192.168.43.245:5000${reel.user.profilePic}`
+        ? `https://social-media-backend-9fag.onrender.com${reel.user.profilePic}`
         : "https://randomuser.me/api/portraits/men/1.jpg"
     }
     alt={reel.user?.name || "User"}
@@ -939,7 +939,7 @@ const handleEditComment = async (reelId, commentId) => {
 )}
 
 <video
-  src={`http://192.168.43.245:5000/uploads/${reel.video}`}
+  src={`https://social-media-backend-9fag.onrender.com/uploads/${reel.video}`}
   controls
   muted
   width="100%"
@@ -1020,7 +1020,7 @@ onEnded={() => {
   >
     {reel.music.coverImage && (
       <img
-        src={`http://192.168.43.245:5000${reel.music.coverImage}`}
+        src={`https://social-media-backend-9fag.onrender.com${reel.music.coverImage}`}
         alt={reel.music.title}
         style={{
           width: "35px",
@@ -1049,7 +1049,7 @@ onEnded={() => {
     </div>
     <audio
   id={`music-${reel._id}`}
-  src={`http://192.168.43.245:5000${reel.music.audioUrl}`}
+  src={`https://social-media-backend-9fag.onrender.com${reel.music.audioUrl}`}
   style={{
     display: "none",
   }}
@@ -1227,7 +1227,7 @@ onEnded={() => {
         <img
           src={
             comment.user?.profilePic
-              ? `http://192.168.43.245:5000${comment.user.profilePic}`
+              ? `https://social-media-backend-9fag.onrender.com${comment.user.profilePic}`
               : "https://randomuser.me/api/portraits/men/1.jpg"
           }
           alt={comment.user?.name || "User"}
@@ -1525,7 +1525,7 @@ onEnded={() => {
             <img
               src={
                 user.profilePic
-                  ? `http://192.168.43.245:5000${user.profilePic}`
+                  ? `https://social-media-backend-9fag.onrender.com${user.profilePic}`
                   : "https://randomuser.me/api/portraits/men/1.jpg"
               }
               alt={user.name}

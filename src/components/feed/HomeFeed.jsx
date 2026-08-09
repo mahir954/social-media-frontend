@@ -13,7 +13,7 @@ function HomeFeed() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/posts",
+        "https://social-media-backend-9fag.onrender.com/api/posts",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -44,7 +44,7 @@ function HomeFeed() {
 
     try {
       const response = await fetch(
-        `http://192.168.43.245:5000/api/posts/${post._id}/${
+        `https://social-media-backend-9fag.onrender.com/api/posts/${post._id}/${
           isLiked ? "unlike" : "like"
         }`,
         {
@@ -80,7 +80,7 @@ function HomeFeed() {
 
     try {
       const response = await fetch(
-        `http://192.168.43.245:5000/api/posts/${post._id}`,
+        `https://social-media-backend-9fag.onrender.com/api/posts/${post._id}`,
         {
           method: "DELETE",
           headers: {
@@ -115,7 +115,7 @@ function HomeFeed() {
 
     try {
       const response = await fetch(
-        `http://192.168.43.245:5000/api/posts/${post._id}`,
+        `https://social-media-backend-9fag.onrender.com/api/posts/${post._id}`,
         {
           method: "PUT",
           headers: {
@@ -160,7 +160,7 @@ function HomeFeed() {
 
     try {
       const response = await fetch(
-        `http://192.168.43.245:5000/api/posts/${post._id}/comment`,
+        `https://social-media-backend-9fag.onrender.com/api/posts/${post._id}/comment`,
         {
           method: "POST",
           headers: {

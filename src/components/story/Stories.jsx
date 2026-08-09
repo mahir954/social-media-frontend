@@ -17,7 +17,7 @@ function Stories() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/stories",
+        "https://social-media-backend-9fag.onrender.com/api/stories",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ function Stories() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/auth/profile",
+        "https://social-media-backend-9fag.onrender.com/api/auth/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -78,7 +78,7 @@ function Stories() {
         <img
           src={
             currentUser?.profilePic
-              ? `http://192.168.43.245:5000${currentUser.profilePic}`
+              ? `https://social-media-backend-9fag.onrender.com${currentUser.profilePic}`
               : "https://randomuser.me/api/portraits/men/1.jpg"
           }
           alt="Add Story"
@@ -121,7 +121,7 @@ function Stories() {
           <img
             src={
               story.user?.profilePic
-                ? `http://192.168.43.245:5000${story.user.profilePic}`
+                ? `https://social-media-backend-9fag.onrender.com${story.user.profilePic}`
                 : "https://randomuser.me/api/portraits/men/1.jpg"
             }
             alt={story.user?.name}

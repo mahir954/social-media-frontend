@@ -174,7 +174,7 @@ useEffect(() => {
   <img
     src={
       user.profilePic
-        ? `http://192.168.43.245:5000${user.profilePic}`
+        ? `https://social-media-backend-9fag.onrender.com${user.profilePic}`
         : "https://randomuser.me/api/portraits/men/1.jpg"
     }
     alt={user.name}

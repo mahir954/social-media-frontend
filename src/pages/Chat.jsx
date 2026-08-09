@@ -39,7 +39,7 @@ const [callType, setCallType] = useState("");
 
 const [muted, setMuted] = useState(false);
 const [cameraOn, setCameraOn] = useState(true);
-  const socket = io("http://192.168.43.245:5000");
+  const socket = io("https://social-media-backend-9fag.onrender.com");
   useEffect(() => {
   let interval;
 
@@ -145,7 +145,7 @@ const [cameraOn, setCameraOn] = useState(true);
         }
 
         const response = await fetch(
-          `http://192.168.43.245:5000/api/messages/${selectedUser._id}`,
+          `https://social-media-backend-9fag.onrender.com/api/messages/${selectedUser._id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -162,7 +162,7 @@ const [cameraOn, setCameraOn] = useState(true);
 
         setMessages(data.messages || []);
         await fetch(
-          `http://192.168.43.245:5000/api/messages/read/${selectedUser._id}`,
+          `https://social-media-backend-9fag.onrender.com/api/messages/read/${selectedUser._id}`,
           {
             method: "PUT",
             headers: {
@@ -298,7 +298,7 @@ const sendVoiceMessage = async () => {
       }
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/messages",
+        "https://social-media-backend-9fag.onrender.com/api/messages",
         {
           method: "POST",
           headers: {
@@ -354,7 +354,7 @@ const sendVoiceMessage = async () => {
     formData.append("receiver", selectedUser._id);
 
     const response = await fetch(
-      "http://192.168.43.245:5000/api/messages/upload",
+      "https://social-media-backend-9fag.onrender.com/api/messages/upload",
       {
         method: "POST",
         headers: {
@@ -397,7 +397,7 @@ const addReaction = async (messageId, reaction) => {
     }
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/messages/${messageId}/react`,
+      `https://social-media-backend-9fag.onrender.com/api/messages/${messageId}/react`,
       {
         method: "PUT",
         headers: {
@@ -438,7 +438,7 @@ const addReaction = async (messageId, reaction) => {
       }
       const response = await
       fetch(
-        `http://192.168.43.245:5000/api/messages/${messageId}`,
+        `https://social-media-backend-9fag.onrender.com/api/messages/${messageId}`,
         {
           method: "Delete",
           headers: {
@@ -473,7 +473,7 @@ const addReaction = async (messageId, reaction) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/messages/${messageId}/unsend`,
+      `https://social-media-backend-9fag.onrender.com/api/messages/${messageId}/unsend`,
       {
         method: "PUT",
         headers: {
@@ -511,7 +511,7 @@ const addReaction = async (messageId, reaction) => {
       }
       const response = await
       fetch(
-        `http://192.168.43.245:5000/api/messages/${messageId}`,
+        `https://social-media-backend-9fag.onrender.com/api/messages/${messageId}`,
         {
           method: "PUT",
           headers: {
@@ -677,7 +677,7 @@ const startCall = (type) => {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-              "http://192.168.43.245:5000/api/messages",
+              "https://social-media-backend-9fag.onrender.com/api/messages",
               {
                 method: "POST",
                 headers: {
@@ -836,7 +836,7 @@ const startCall = (type) => {
 
     {msg.storyMedia && (
       <img
-        src={`http://192.168.43.245:5000${msg.storyMedia}`}
+        src={`https://social-media-backend-9fag.onrender.com${msg.storyMedia}`}
         alt="Story"
         style={{
           width: "50px",
@@ -877,7 +877,7 @@ const startCall = (type) => {
     <p>📸 Mentioned you in a story</p>
 
     <img
-      src={`http://192.168.43.245:5000${msg.storyMedia}`}
+      src={`https://social-media-backend-9fag.onrender.com${msg.storyMedia}`}
       alt="Story"
       style={{
         width: "180px",
@@ -890,13 +890,13 @@ const startCall = (type) => {
 ) : msg.fileUrl ? (
   msg.fileType?.startsWith("image/") ? (
     <img
-      src={`http://192.168.43.245:5000${msg.fileUrl}`}
+      src={`https://social-media-backend-9fag.onrender.com${msg.fileUrl}`}
       alt={msg.fileName}
       className="chat-image"
     />
   ) : (
     <a
-      href={`http://192.168.43.245:5000${msg.fileUrl}`}
+      href={`https://social-media-backend-9fag.onrender.com${msg.fileUrl}`}
       target="_blank"
       rel="noopener noreferrer"
       className="chat-file"

@@ -21,7 +21,7 @@ function StoryViewer() {
         const token = localStorage.getItem("token");
 
         const response = await fetch(
-          "http://192.168.43.245:5000/api/stories",
+          "https://social-media-backend-9fag.onrender.com/api/stories",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -65,7 +65,7 @@ function StoryViewer() {
         setLiked(!!isLiked);
 
         await fetch(
-          `http://192.168.43.245:5000/api/stories/${storyId}/view`,
+          `https://social-media-backend-9fag.onrender.com/api/stories/${storyId}/view`,
           {
             method: "PUT",
             headers: {
@@ -85,7 +85,7 @@ function StoryViewer() {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          "http://192.168.43.245:5000/api/users"
+          "https://social-media-backend-9fag.onrender.com/api/users"
         );
 
         const data = await response.json();
@@ -115,7 +115,7 @@ const handleReaction = async (reaction) => {
     }
 
     const response = await fetch(
-      `http://192.168.43.245:5000/api/stories/${story._id}/reaction`,
+      `https://social-media-backend-9fag.onrender.com/api/stories/${story._id}/reaction`,
       {
         method: "PUT",
         headers: {
@@ -164,7 +164,7 @@ const handleReaction = async (reaction) => {
       data.story.user._id !== currentUserId
     ) {
       await fetch(
-        "http://192.168.43.245:5000/api/messages",
+        "https://social-media-backend-9fag.onrender.com/api/messages",
         {
           method: "POST",
           headers: {
@@ -214,7 +214,7 @@ const handleReaction = async (reaction) => {
       }
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/messages",
+        "https://social-media-backend-9fag.onrender.com/api/messages",
         {
           method: "POST",
           headers: {
@@ -261,7 +261,7 @@ const handleReaction = async (reaction) => {
       }
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/messages",
+        "https://social-media-backend-9fag.onrender.com/api/messages",
         {
           method: "POST",
           headers: {
@@ -309,7 +309,7 @@ const handleReaction = async (reaction) => {
     }
 
     const response = await fetch(
-      "http://192.168.43.245:5000/api/stories/add-mentioned",
+      "https://social-media-backend-9fag.onrender.com/api/stories/add-mentioned",
       {
         method: "POST",
         headers: {
@@ -346,7 +346,7 @@ const handleReaction = async (reaction) => {
       }
 
       const response = await fetch(
-        `http://192.168.43.245:5000/api/stories/${story._id}/like`,
+        `https://social-media-backend-9fag.onrender.com/api/stories/${story._id}/like`,
         {
           method: "PUT",
           headers: {
@@ -400,7 +400,7 @@ const handleReaction = async (reaction) => {
       }
 
       const response = await fetch(
-        `http://192.168.43.245:5000/api/stories/${story._id}/comment`,
+        `https://social-media-backend-9fag.onrender.com/api/stories/${story._id}/comment`,
         {
           method: "POST",
           headers: {
@@ -494,7 +494,7 @@ const handleReaction = async (reaction) => {
         <img
           src={
             story.user?.profilePic
-              ? `http://192.168.43.245:5000${story.user.profilePic}`
+              ? `https://social-media-backend-9fag.onrender.com${story.user.profilePic}`
               : "https://randomuser.me/api/portraits/men/1.jpg"
           }
           alt={story.user?.name || "User"}
@@ -581,7 +581,7 @@ const handleReaction = async (reaction) => {
 
                   const response =
                     await fetch(
-                      `http://192.168.43.245:5000/api/stories/${story._id}`,
+                      `https://social-media-backend-9fag.onrender.com/api/stories/${story._id}`,
                       {
                         method: "DELETE",
                         headers: {
@@ -647,7 +647,7 @@ const handleReaction = async (reaction) => {
 
                 const response =
                   await fetch(
-                    `http://192.168.43.245:5000/api/stories/${story._id}/highlight`,
+                    `https://social-media-backend-9fag.onrender.com/api/stories/${story._id}/highlight`,
                     {
                       method: "PUT",
                       headers: {
@@ -812,7 +812,7 @@ const handleReaction = async (reaction) => {
                 <img
                   src={
                     user.profilePic
-                      ? `http://192.168.43.245:5000${user.profilePic}`
+                      ? `https://social-media-backend-9fag.onrender.com${user.profilePic}`
                       : "https://randomuser.me/api/portraits/men/1.jpg"
                   }
                   alt={user.name}
@@ -858,7 +858,7 @@ const handleReaction = async (reaction) => {
       {/* Story Media */}
       {story.mediaType === "video" ? (
         <video
-          src={`http://192.168.43.245:5000${story.media}`}
+          src={`https://social-media-backend-9fag.onrender.com${story.media}`}
           controls
           autoPlay
           style={{
@@ -869,7 +869,7 @@ const handleReaction = async (reaction) => {
         />
       ) : (
         <img
-          src={`http://192.168.43.245:5000${story.media}`}
+          src={`https://social-media-backend-9fag.onrender.com${story.media}`}
           alt="Story"
           style={{
             maxWidth: "90%",
@@ -932,7 +932,7 @@ const handleReaction = async (reaction) => {
     <audio
       controls
       preload="metadata"
-      src={`http://192.168.43.245:5000${story.music.audioUrl}`}
+      src={`https://social-media-backend-9fag.onrender.com${story.music.audioUrl}`}
       style={{
         width: "100%",
         height: "32px",
@@ -1005,7 +1005,7 @@ const handleReaction = async (reaction) => {
                 <img
                   src={
                     viewer.profilePic
-                      ? `http://192.168.43.245:5000${viewer.profilePic}`
+                      ? `https://social-media-backend-9fag.onrender.com${viewer.profilePic}`
                       : "https://randomuser.me/api/portraits/men/1.jpg"
                   }
                   alt={
@@ -1075,7 +1075,7 @@ const handleReaction = async (reaction) => {
           <img
             src={
               like.profilePic
-                ? `http://192.168.43.245:5000${like.profilePic}`
+                ? `https://social-media-backend-9fag.onrender.com${like.profilePic}`
                 : "https://randomuser.me/api/portraits/men/1.jpg"
             }
             alt={like.name || "User"}
@@ -1118,7 +1118,7 @@ const handleReaction = async (reaction) => {
   <img
     src={
       comment.user?.profilePic
-        ? `http://192.168.43.245:5000${comment.user.profilePic}`
+        ? `https://social-media-backend-9fag.onrender.com${comment.user.profilePic}`
         : "https://randomuser.me/api/portraits/men/1.jpg"
     }
     alt={comment.user?.name || "User"}
@@ -1159,7 +1159,7 @@ const handleReaction = async (reaction) => {
       {/* Story Media End */}
       {story.mediaType === "video" ? (
         <video
-          src={`http://192.168.43.245:5000${story.media}`}
+          src={`https://social-media-backend-9fag.onrender.com${story.media}`}
           controls
           autoPlay
           style={{
@@ -1170,7 +1170,7 @@ const handleReaction = async (reaction) => {
         />
       ) : (
         <img
-          src={`http://192.168.43.245:5000${story.media}`}
+          src={`https://social-media-backend-9fag.onrender.com${story.media}`}
           alt="Story"
           style={{
             maxWidth: "90%",
@@ -1268,7 +1268,7 @@ const handleReaction = async (reaction) => {
                 <img
                   src={
                     viewer.profilePic
-                      ? `http://192.168.43.245:5000${viewer.profilePic}`
+                      ? `https://social-media-backend-9fag.onrender.com${viewer.profilePic}`
                       : "https://randomuser.me/api/portraits/men/1.jpg"
                   }
                   alt={viewer.name || "User"}
@@ -1374,7 +1374,7 @@ const handleReaction = async (reaction) => {
           <img
             src={
               comment.user?.profilePic
-                ? `http://192.168.43.245:5000${comment.user.profilePic}`
+                ? `https://social-media-backend-9fag.onrender.com${comment.user.profilePic}`
                 : "https://randomuser.me/api/portraits/men/1.jpg"
             }
             alt={comment.user?.name || "User"}

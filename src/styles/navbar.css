@@ -220,6 +220,29 @@
   margin: 8px 0 0;
   font-size: 14px;
 }
+.navbar-badge-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-badge {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 50px;
+  background: red;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
 /* mobile responsive */
 @media (max-width: 600px) {
   .navbar {
@@ -246,3 +269,4 @@
     font-size: 14px;
   }
 }
+

@@ -49,7 +49,7 @@ function Notifications() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://192.168.43.245:5000/api/notifications`,
+        `https://social-media-backend-9fag.onrender.com/api/notifications`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -71,14 +71,42 @@ function Notifications() {
   };
 
   useEffect(() => {
+  const loadNotifications = async () => {
+    await fetchNotifications();
+
+    // Notifications page open hote hi unread notifications read kar do
+    try {
+      const token = localStorage.getItem("token");
+
+      await fetch(
+        "https://social-media-backend-9fag.onrender.com/api/notifications/read-all",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setNotifications((prev) =>
+        prev.map((notification) => ({
+          ...notification,
+          isRead: true,
+        }))
+      );
+    } catch (error) {
+      console.error("Auto Mark Read Error:", error);
+    }
+  };
+
+  loadNotifications();
+
+  const interval = setInterval(() => {
     fetchNotifications();
+  }, 60000);
 
-    const interval = setInterval(() => {
-      fetchNotifications();
-    }, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
+  return () => clearInterval(interval);
+}, []);
 
   const handleNotificationClick = async (
     notification
@@ -87,7 +115,7 @@ function Notifications() {
       const token = localStorage.getItem("token");
 
       await fetch(
-        `http://192.168.43.245:5000/api/notifications/${notification._id}/read`,
+        `https://social-media-backend-9fag.onrender.com/api/notifications/${notification._id}/read`,
         {
           method: "PUT",
           headers: {
@@ -160,7 +188,7 @@ function Notifications() {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://192.168.43.245:5000/api/stories/add-mentioned",
+      "https://social-media-backend-9fag.onrender.com/api/stories/add-mentioned",
       {
         method: "POST",
         headers: {
@@ -192,7 +220,7 @@ function Notifications() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/notifications/read-all",
+        "https://social-media-backend-9fag.onrender.com/api/notifications/read-all",
         {
           method: "PUT",
           headers: {
@@ -256,7 +284,7 @@ function Notifications() {
                 src={
                   notification.sender
                     ?.profilePic
-                    ? `http://192.168.43.245:5000${notification.sender.profilePic}`
+                    ? `https://social-media-backend-9fag.onrender.com${notification.sender.profilePic}`
                     : "https://randomuser.me/api/portraits/men/1.jpg"
                 }
                 alt={

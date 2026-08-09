@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Call.css";
 import { io } from "socket.io-client";
 
-const socket = io("http://192.168.43.245:5000");
+const socket = io("https://social-media-backend-9fag.onrender.com");
 
 function AudioCall({
   userName,
@@ -428,7 +428,7 @@ function AudioCall({
         <img
           src={
             profilePic
-            ? `http://192.168.43.245:5000${profilePic}`
+            ? `https://social-media-backend-9fag.onrender.com${profilePic}`
             : "/default-profile.png"
           }
           className="audio-profile-pic"
