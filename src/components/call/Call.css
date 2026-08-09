@@ -1,0 +1,282 @@
+.incoming-call-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.incoming-call-box {
+  width: 340px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.incoming-call-box h2 {
+  margin-bottom: 10px;
+}
+
+.incoming-call-box h3 {
+  margin-bottom: 25px;
+}
+
+.call-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.call-buttons button {
+  border: none;
+  border-radius: 50px;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.call-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.call-controls button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.end-call-btn {   
+  background: red;
+  color: black;
+}
+.incoming-call-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.incoming-call-box {
+  width: 95%;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.incoming-call-box h2 {
+  margin-bottom: 10px;
+}
+
+.incoming-call-box button {
+  width: 140px;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: black;
+  color: red;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.call-profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.remote-video-box {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+}
+.audio-profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 20px auto;
+}
+.call-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.accept-btn,
+.reject-btn {
+  width: 120px;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.accept-btn {
+  background: #25d366;
+}
+
+.reject-btn {
+  background: #ff3040;
+}
+.incoming-call-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+.mic-btn {
+  width: 140px;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  background: #2196f3;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.camera-btn {
+  width: 140px;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  background: #ff9800;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.call-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.call-controls button {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mic-btn {
+  background: #2196f3;
+  color: white;
+}
+
+.camera-btn {
+  background: #ff9800;
+  color: white;
+}
+
+.end-call-btn {
+  background: #f44336;
+  color: white;
+}
+/* Mic Button States */
+.mic-btn.on {
+  background-color: #25d366;
+  color: white;
+}
+
+.mic-btn.off {
+  background-color: #616161;
+  color: white;
+}
+
+/* Camera Button States */
+.camera-btn.on {
+  background-color: #2196f3;
+  color: white;
+}
+
+.camera-btn.off {
+  background-color: #616161;
+  color: white;
+}
+/* Speaker Button States */
+.speaker-btn.on {
+  background-color: #9c27b0;
+  color: white;
+}
+
+.speaker-btn.off {
+  background-color: #616161;
+  color: white;
+}
+.switch-camera-btn {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: #673ab7;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.network-status {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 8px 0;
+  color: #555;
+}
+.network-status {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 8px 0;
+  color: #555;
+}
