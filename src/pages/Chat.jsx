@@ -57,7 +57,7 @@ const [cameraOn, setCameraOn] = useState(true);
 
   // Listen for typing indicator
   useEffect(() => {
-    const socket = io("http://192.168.43.245:5000");
+    const socket = io("https://social-media-backend-9fag.onrender.com");
     const userId = localStorage.getItem("userId");
     if (userId){
       socket.emit("userOnline", userId);
@@ -94,7 +94,7 @@ const [cameraOn, setCameraOn] = useState(true);
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          "http://192.168.43.245:5000/api/users"
+          "https://social-media-backend-9fag.onrender.com/api/users"
       
         );
 
