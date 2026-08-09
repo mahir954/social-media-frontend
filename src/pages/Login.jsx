@@ -102,7 +102,7 @@ if (!accountExists) {
 
     try {
       const response = await fetch(
-        "http://192.168.43.245:5000/api/auth/forgot-password",
+        "https://social-media-backend-9fag.onrender.com/api/auth/forgot-password",
         {
           
           method: "POST",
