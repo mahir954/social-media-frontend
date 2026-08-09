@@ -9,7 +9,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://192.168.43.245:5000/api/users/login",
+        "https://social-media-backend-9fag.onrender.com/api/users/login",
         {
           method: "POST",
           headers: {
