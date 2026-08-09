@@ -13,7 +13,7 @@ function BlockedUsers() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/users/profile",
+        "https://social-media-backend-9fag.onrender.com/api/users/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
