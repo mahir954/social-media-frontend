@@ -1,0 +1,238 @@
+.reels-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #f5f7fa;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Heading */
+.reels-container h1 {
+  text-align: center;
+  color: #1877f2;
+  margin-bottom: 25px;
+}
+
+/* Create Reel Form */
+.reel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.reel-form input,
+.reel-form textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.reel-form input:focus,
+.reel-form textarea:focus {
+  border-color: #1877f2;
+}
+
+.reel-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.reel-form button {
+  padding: 12px;
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.reel-form button:hover {
+  background: #0d65d9;
+}
+
+/* Reels Feed */
+.reels-feed {
+  margin-top: 40px;
+}
+
+.reels-feed h2 {
+  text-align: center;
+  color: #1877f2;
+  margin-bottom: 20px;
+}
+
+/* Reel Card */
+.reel-card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* User Name */
+.reel-card strong {
+  font-size: 18px;
+  color: #333;
+  margin-right: 15px;
+}
+
+/* Caption */
+.reel-card p {
+  margin-top: 12px;
+  color: #555;
+  font-size: 15px;
+}
+
+/* Reel Video */
+.reel-card video {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.reel-card button {
+  transition: 0.2s;
+}
+
+.reel-card button:hover {
+  opacity: 0.85;
+}
+
+/* Comment Section */
+.reel-card input[type="text"] {
+  box-sizing: border-box;
+  outline: none;
+}
+
+.reel-card input[type="text"]:focus {
+  border-color: #1877f2 !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .reels-container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .reel-card {
+    padding: 15px;
+  }
+
+  .reel-card video {
+    max-height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reels-container {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    border-radius: 0;
+  }
+
+  .reel-card {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .reel-card strong {
+    font-size: 16px;
+  }
+
+  .reel-card video {
+    max-height: 400px;
+  }
+}
+/* mobile responsive for reel form */
+@media (max-width: 600px) {
+  .reels-container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .reels-container h1 {
+    font-size: 24px;
+  }
+
+  .reel-form {
+    gap: 10px;
+  }
+
+  .reel-form input,
+  .reel-form textarea {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .reel-form button {
+    width: 100%;
+  }
+
+  .reel-card {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .reel-card video {
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+    max-height: 450px;
+  }
+
+  .reel-card img {
+    max-width: 100%;
+  }
+
+  .reel-card button {
+    margin-top: 8px;
+    margin-right: 5px;
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+
+  .reel-card input {
+    width: 65% !important;
+    box-sizing: border-box;
+  }
+
+  .reel-card textarea {
+    width: 100%;
+  }
+
+  .reel-card .comment-item {
+    width: 100%;
+  }
+
+  .reel-card small {
+    font-size: 11px;
+  }
+
+  .reels-feed h2 {
+    font-size: 22px;
+  }
+}

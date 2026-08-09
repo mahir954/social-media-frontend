@@ -1,0 +1,120 @@
+.notifications-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.notifications-container h1 {
+  text-align: center;
+  color: #1877f2;
+  margin-bottom: 25px;
+  font-size: 32px;
+}
+
+/* Mark All as Read Button */
+.notifications-container > button {
+  display: block;
+  margin: 0 auto 25px;
+  padding: 10px 20px;
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.notifications-container > button:hover {
+  background: #0d65d9;
+}
+
+/* Notification Card */
+.notification-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: black;
+  padding: 18px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.notification-card:hover {
+  transform: translateY(-2px);
+  background: black;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.15);
+}
+
+.notification-card p {
+  margin: 0;
+  color: greenyellow;
+  font-size: 16px;
+}
+
+.notification-card strong {
+  color: #1877f2;
+}
+
+@media (max-width: 600px) {
+  .notifications-container {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .notifications-container h1 {
+    font-size: 26px;
+  }
+
+  .notification-card {
+    padding: 15px;
+  }
+}
+.notification-card small {
+  color: blue;
+  font-size: 13px;
+  font-weight: 600;
+}
+/* Responsive Design */
+@media (max-width: 600px) {
+  .notifications-container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .notifications-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .notifications-container > button {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .notification-card {
+    width: 100%;
+    padding: 12px;
+    gap: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .notification-card p {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .notification-card strong {
+    font-size: 14px;
+  }
+
+  .notification-card small {
+    font-size: 11px;
+  }
+}

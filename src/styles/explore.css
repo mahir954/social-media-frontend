@@ -1,0 +1,280 @@
+.explore-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* Main Heading */
+.explore-container h1 {
+  text-align: center;
+  color: #1877f2;
+  margin-bottom: 30px;
+}
+
+/* Section Heading */
+.explore-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Search Input */
+.explore-container input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0 25px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.explore-container input:focus {
+  border-color: #1877f2;
+  box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.1);
+}
+
+/* Post Card */
+.explore-post {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #1877f2;
+  transition: 0.2s ease;
+  box-sizing: border-box;
+}
+
+.explore-post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Post User */
+.post-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.post-user-image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #1877f2;
+}
+
+.post-user strong {
+  color: #333;
+  font-size: 16px;
+}
+
+/* Post Content */
+.explore-post p {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+/* Post Image */
+.explore-post-image {
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 15px auto;
+  border-radius: 10px;
+}
+
+/* Comments Section */
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 0;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.comment-user-image {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.comment-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.comment-content p {
+  margin: 3px 0 0;
+  color: #555;
+  word-wrap: break-word;
+}
+
+.comment-actions {
+  margin-top: 6px;
+}
+
+.comment-actions button {
+  margin-right: 8px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #eee;
+  transition: 0.2s;
+}
+
+.comment-actions button:hover {
+  background: #ddd;
+}
+
+/* No Posts */
+.no-posts {
+  text-align: center;
+  color: #777;
+  padding: 30px;
+  background-color: #f5f7fa;
+  border-radius: 10px;
+}
+
+/* Buttons inside Explore */
+.explore-container button {
+  transition: 0.2s ease;
+}
+
+.explore-container button:hover {
+  opacity: 0.85;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .explore-container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .explore-post {
+    padding: 15px;
+  }
+
+  .explore-post-image {
+    max-height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-container {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+  }
+
+  .explore-container h1 {
+    font-size: 24px;
+  }
+
+  .explore-post {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .post-user-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .explore-post p {
+    font-size: 15px;
+  }
+
+  .comment-item {
+    padding: 8px;
+  }
+}
+/* mobile responsive for comment actions */
+@media (max-width: 600px) {
+  .explore-container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .explore-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .explore-container h2 {
+    font-size: 20px;
+  }
+
+  .explore-container input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .explore-post {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+  }
+
+  .explore-post-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .post-user {
+    gap: 6px;
+  }
+
+  .post-user-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comment-item {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .comment-user-image {
+    width: 32px;
+    height: 32px;
+  }
+
+  .comment-content {
+    min-width: 0;
+    word-wrap: break-word;
+  }
+
+  .comment-actions button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .explore-post button {
+    max-width: 100%;
+    margin-right: 5px;
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+}

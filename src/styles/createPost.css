@@ -1,0 +1,74 @@
+.create-post {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.create-post textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    resize: none;
+}
+.create-post button{
+    background: #1877f2;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.create-post button:hover {
+    background: #0f5ec7;
+}
+input[type="text"]{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+/* Responsive Design */
+@media (max-width: 600px) {
+  .create-post {
+    width: 95%;
+    margin: 15px auto;
+    padding: 15px;
+    border-radius: 10px;
+  }
+
+  .create-post textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .create-post input[type="file"] {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .create-post img,
+  .create-post video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .create-post button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .create-post input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

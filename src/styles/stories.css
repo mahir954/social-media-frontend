@@ -1,0 +1,55 @@
+.stories-container {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.story-card {
+  min-width: 75px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.story-card img,
+.add-story-icon {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.story-card img {
+  border: 3px solid #1877f2;
+  padding: 2px;
+}
+
+.story-card p {
+  margin-top: 5px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.add-story-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1877f2;
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+}
+@keyframes storyProgress {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
