@@ -10,7 +10,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "http://192.168.43.245:5000/api/users/register",
+        "https://social-media-backend-9fag.onrender.com/api/users/register",
         {
           method: "POST",
           headers: {
