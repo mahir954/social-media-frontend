@@ -103,7 +103,7 @@ const [editingCaption, setEditingCaption] = useState("");
     }
 
     const response = await fetch(
-      "http://192.168.43.245:5000/api/auth/profile",
+      "https://social-media-backend-9fag.onrender.com/api/auth/profile",
       {
         method: "PUT",
         headers: {
