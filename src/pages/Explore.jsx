@@ -13,7 +13,7 @@ function Explore() {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          "http://192.168.43.245:5000/api/posts",
+          "https://social-media-backend-9fag.onrender.com/api/posts",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
