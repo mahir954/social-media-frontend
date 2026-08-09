@@ -15,7 +15,7 @@ const [isCloseFriends, setIsCloseFriends] = useState(false);
   const fetchMusic = async () => {
     try {
       const response = await fetch(
-        "http://192.168.43.245:5000/api/music"
+        "https://social-media-backend-9fag.onrender.com/api/music"
       );
 
       const data = await response.json();
@@ -36,7 +36,7 @@ useEffect(() => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/users",
+        "https://social-media-backend-9fag.onrender.com/api/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ useEffect(() => {
       formData.append("isCloseFriends", isCloseFriends);
 
       const response = await fetch(
-        "http://192.168.43.245:5000/api/stories",
+        "https://social-media-backend-9fag.onrender.com/api/stories",
         {
           method: "POST",
           headers: {
