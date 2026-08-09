@@ -2,7 +2,7 @@ import Admin from "../admin/Admin";
 import AdminLogin from "../admin/AdminLogin";
 import { Routes, Route } from "react-router-dom";
 import Notification from "./pages/Notifications";
-
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -31,7 +31,7 @@ function App() {
       <Route path="/admin"
       element={<Admin />} />
       <Route path="/admin-login" element={<AdminLogin />} />
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile" element={<Profile />} />
