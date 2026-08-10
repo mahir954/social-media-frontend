@@ -65,11 +65,15 @@
 }
 
 .my-message-row {
-  align-items: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .other-message-row {
-  align-items: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .message-item {
