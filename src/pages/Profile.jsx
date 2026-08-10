@@ -589,13 +589,23 @@ if (highlightsResponse.ok) {
     return <h2>Loading Profile...</h2>;
   }
 
-  return (
-    <div className="profile-container">
+ return (
+  <div className="profile-container">
+
+    <div className="profile-header">
+      <button
+        className="profile-back-btn"
+        onClick={() => navigate(-1)}
+      >
+        ←
+      </button>
+
       <h1>
         {profileUserId
           ? `${user.name}'s profile`
           : "My Profile"}
       </h1>
+    </div>
 
       {profileUserId && profileUserId !== currentUserId && (
         <button
