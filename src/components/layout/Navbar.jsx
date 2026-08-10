@@ -147,8 +147,8 @@ useEffect(() => {
     }
 
     const endpoint = isFollowing
-      ? https://social-media-backend-9fag.onrender.com/api/users/${userId}/unfollow
-      : https://social-media-backend-9fag.onrender.com/api/users/${userId}/follow;
+      ? `https://social-media-backend-9fag.onrender.com/api/users/${userId}/unfollow`
+      : `https://social-media-backend-9fag.onrender.com/api/users/${userId}/follow`;
 
     const response = await fetch(endpoint, {
       method: "POST",
