@@ -142,6 +142,57 @@ const [editingCaption, setEditingCaption] = useState("");
     alert("Server error");
   }
 };
+  const handleDeleteAccount = async () => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to permanently delete your account? All your posts, reels, stories, notes, messages and other data will be deleted."
+  );
+
+  if (!confirmDelete) return;
+
+  const finalConfirm = window.confirm(
+    "This action cannot be undone. Do you really want to delete your account?"
+  );
+
+  if (!finalConfirm) return;
+
+  try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first");
+      return;
+    }
+
+    const response = await fetch(
+      "https://social-media-backend-9fag.onrender.com/api/users/account",
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.message || "Failed to delete account");
+      return;
+    }
+
+    // Remove login data
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+
+    alert("Your account has been deleted successfully.");
+
+    // Go to login page
+    navigate("/login");
+  } catch (error) {
+    console.error("Delete Account Error:", error);
+    alert("Server error. Please try again.");
+  }
+};
   const handleFollowToggle = async () => {
     try {
       const token = localStorage.getItem("token");
