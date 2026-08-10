@@ -1040,10 +1040,11 @@ const startCall = (type) => {
                   <button onClick={() => setReplyTo(null)}>❌</button>
                   </div>
               )}
-              {isTyping && (
-                <p
-                className="typing-indicator">{selectedUser.name} is typing...</p>
-              )}
+             {otherUserTyping && (
+  <p className="typing-indicator">
+    {selectedUser.name} is typing...
+  </p>
+)}
               <label htmlFor="file-upload" className="file-upload-btn">📎</label>
               <input
               id="file-upload"
