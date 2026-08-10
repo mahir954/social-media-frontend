@@ -772,16 +772,15 @@ const startCall = (type) => {
               .includes(searchText.toLowerCase())
               )
               .map((msg, index) => {
-                const myUserId =
-                  localStorage.getItem("userId");
+                const myUserId = localStorage.getItem("userId");
 
-                const senderId =
-                  typeof msg.sender === "object"
-                    ? msg.sender._id
-                    : msg.sender;
+const senderId =
+  typeof msg.sender === "object"
+    ? msg.sender._id?.toString()
+    : msg.sender?.toString();
 
-                const isMyMessage =
-                  senderId === myUserId;
+const isMyMessage =
+  senderId === myUserId?.toString();
 
                 const currentDate =
                   new Date(
