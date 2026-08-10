@@ -1024,6 +1024,7 @@ if (highlightsResponse.ok) {
     onClick={handleDeleteAccount}
     style={{
       marginTop: "20px",
+      marginRight: "10px",
       padding: "10px 20px",
       borderRadius: "8px",
       border: "none",
