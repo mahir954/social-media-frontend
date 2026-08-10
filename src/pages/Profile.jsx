@@ -622,7 +622,7 @@ if (highlightsResponse.ok) {
         ? `${user.name}'s profile`
         : "My Profile"}
     </h1>
-    </div>
+  
 
       {profileUserId && profileUserId !== currentUserId && (
         <button
