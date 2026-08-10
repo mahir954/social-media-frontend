@@ -1019,6 +1019,24 @@ if (highlightsResponse.ok) {
             </button>   
           )
         )}
+        {!profileUserId && (
+  <button
+    onClick={handleDeleteAccount}
+    style={{
+      marginTop: "20px",
+      padding: "10px 20px",
+      borderRadius: "8px",
+      border: "none",
+      background: "#dc3545",
+      color: "white",
+      fontSize: "15px",
+      fontWeight: "600",
+      cursor: "pointer",
+    }}
+  >
+    Delete Account
+  </button>
+)}
         <button onClick={handleShareProfile}
          style={{
       flex: 1,
