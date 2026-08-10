@@ -1,1 +1,49 @@
+.home-layout {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
+.home-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.home-content h1 {
+  margin-bottom: 8px;
+}
+
+.home-content p {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 600px) {
+  .home-layout {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .home-content {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .home-content h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .home-content p {
+    font-size: 14px;
+    text-align: center;
+  }
+}
