@@ -53,3 +53,22 @@
     width: 100%;
   }
 }
+@media (max-width: 600px) {
+  .stories-container {
+    align-items: flex-start;
+  }
+
+  .story-card {
+    min-width: 65px;
+  }
+
+  .add-story-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-sizing: border-box;
+  }
+}
