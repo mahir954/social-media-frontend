@@ -1,36 +1,97 @@
 .admin-login-container {
-min-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-background: #f5f5f5;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .admin-login-box {
-width: 400px;
-padding: 30px;
-background: white;
-border-radius: 10px;
-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-text-align: center;
+  width: 400px;
+  max-width: 100%;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  box-sizing: border-box;
 }
+
 .admin-login-box h1 {
-margin: 0 0 30px 0;
-font-size: 28px;
-line-height: 1.4;
-text-align: center;
-white-space: nowrap;
+  margin: 0 0 30px 0;
+  font-size: 28px;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .admin-login-box input {
-width: 100%;
-padding: 12px;
-margin-bottom: 15px;
-box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.admin-login-box input:focus {
+  border-color: #007bff;
 }
 
 .admin-login-box button {
-width: 100%;
-padding: 12px;
-cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.admin-login-box button:hover {
+  background: #0056b3;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .admin-login-container {
+    padding: 15px;
+  }
+
+  .admin-login-box {
+    width: 100%;
+    padding: 25px 20px;
+  }
+
+  .admin-login-box h1 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .admin-login-box input {
+    padding: 11px;
+    font-size: 15px;
+  }
+
+  .admin-login-box button {
+    padding: 11px;
+    font-size: 15px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 350px) {
+  .admin-login-box {
+    padding: 20px 15px;
+  }
+
+  .admin-login-box h1 {
+    font-size: 22px;
+  }
 }
