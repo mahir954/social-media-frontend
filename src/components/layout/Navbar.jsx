@@ -117,6 +117,78 @@ useEffect(() => {
 
   return () => clearInterval(interval);
 }, []);
+  const handleFollowToggle = async (userId) => {
+  try {
+    const token = localStorage.getItem("token");
+    const currentUserId = localStorage.getItem("userId");
+
+    if (!token || !currentUserId) {
+      alert("Please login first");
+      return;
+    }
+
+    const user = searchResults.find(
+      (item) => item._id === userId
+    );
+
+    if (!user) return;
+
+    const isFollowing = user.followers?.some(
+      (id) => id.toString() === currentUserId
+    );
+
+    const isRequested = user.followRequests?.some(
+      (id) => id.toString() === currentUserId
+    );
+
+    // Already requested — kuch nahi karna
+    if (isRequested) {
+      return;
+    }
+
+    const endpoint = isFollowing
+      ? https://social-media-backend-9fag.onrender.com/api/users/${userId}/unfollow
+      : https://social-media-backend-9fag.onrender.com/api/users/${userId}/follow;
+
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.message || "Action failed");
+      return;
+    }
+
+    setSearchResults((prev) =>
+      prev.map((item) =>
+        item._id === userId
+          ? {
+              ...item,
+              followers: data.followers || item.followers,
+              followRequests: data.requestSent
+                ? [
+                    ...(item.followRequests || []),
+                    currentUserId,
+                  ]
+                : item.followRequests,
+            }
+          : item
+      )
+    );
+
+    if (data.requestSent) {
+      alert("Follow request sent successfully");
+    }
+  } catch (error) {
+    console.error("Follow Toggle Error:", error);
+    alert("Server error");
+  }
+};
 
   const handleUserClick = (userId) => {
     setSearchText("");
@@ -219,7 +291,50 @@ useEffect(() => {
                       <span>{user.email}</span>
                     </div>
 
-                    <span className="profile-arrow">→</span>
+                    <button
+  type="button"
+  onClick={(e) => {
+    e.stopPropagation();
+    handleFollowToggle(user._id);
+  }}
+  style={{
+    marginLeft: "10px",
+    padding: "6px 12px",
+    border: "none",
+    borderRadius: "20px",
+    background: user.followRequests?.some(
+      (id) =>
+        id.toString() ===
+        localStorage.getItem("userId")
+    )
+      ? "#999"
+      : user.followers?.some(
+          (id) =>
+            id.toString() ===
+            localStorage.getItem("userId")
+        )
+      ? "#666"
+      : "#1877f2",
+    color: "white",
+    fontWeight: "600",
+    cursor: "pointer",
+    whiteSpace: "nowrap",
+  }}
+>
+  {user.followRequests?.some(
+    (id) =>
+      id.toString() ===
+      localStorage.getItem("userId")
+  )
+    ? "Requested"
+    : user.followers?.some(
+        (id) =>
+          id.toString() ===
+          localStorage.getItem("userId")
+      )
+    ? "Following"
+    : "Follow"}
+</button>
                   </div>
                 ))}
               </>
