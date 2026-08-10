@@ -230,49 +230,47 @@
 }
 
 /* Mobile Responsive */
-@media (max-width: 768px) {
-  .profile-container {
-    width: 95%;
-    margin: 20px auto;
-    padding: 20px;
-  }
-
-  .profile-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .profile-stats div {
-    padding: 15px 10px;
-  }
-
-  .profile-stats h3 {
-    font-size: 23px;
-  }
-
-  .follow-list {
-    width: 100%;
-    box-sizing: border-box;
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .profile-container {
     width: 100%;
+    max-width: 100%;
     margin: 0;
-    padding: 15px;
+    padding: 12px;
     border-radius: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
 
   .profile-container h1 {
-    font-size: 24px;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .profile-info {
+    padding: 12px;
+    margin-bottom: 18px;
+  }
+
+  .profile-info img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .profile-info p {
+    font-size: 14px;
+    word-break: break-word;
   }
 
   .profile-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
+    margin: 15px 0;
   }
 
   .profile-stats div {
+    min-width: 0;
     padding: 12px 5px;
     border-radius: 10px;
   }
@@ -285,94 +283,85 @@
     font-size: 12px;
   }
 
-  .follow-user img {
-    width: 45px;
-    height: 45px;
-  }
-}
-/* mobile responsive for my posts and reels */
-@media (max-width: 600px) {
-  .profile-container {
-    width: 95%;
-    margin: 20px auto;
-    padding: 15px;
-    border-radius: 10px;
-  }
-
-  .profile-container h1 {
-    font-size: 24px;
-  }
-
-  .profile-info {
-    padding: 15px;
-  }
-
-  .profile-info img {
-    max-width: 100%;
-  }
-
-  .profile-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    width: 100%;
-    margin: 20px auto;
-  }
-
-  .profile-stats div {
-    padding: 12px 8px;
-  }
-
-  .profile-stats h3 {
-    font-size: 22px;
-  }
-
-  .profile-stats p {
-    font-size: 13px;
-  }
-
   .follow-list {
     width: 100%;
-    padding: 15px;
+    max-width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
   }
 
   .follow-user {
+    width: 100%;
+    box-sizing: border-box;
+    gap: 10px;
     padding: 10px;
   }
 
   .follow-user img {
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
   }
 
-  .my-post {
+  .follow-user strong {
+    font-size: 15px;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .edit-form {
     padding: 12px;
   }
 
-  .my-post img {
-    max-width: 100%;
-    height: auto !important;
+  .edit-form input {
+    width: 100%;
+    box-sizing: border-box;
   }
 
+  .my-posts,
   .my-reels {
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .my-post {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  .my-post img {
+    width: 100%;
+    max-width: 100%;
+    height: auto !important;
+    object-fit: contain;
   }
 
   .my-reels > div {
     grid-template-columns: 1fr !important;
+    width: 100%;
   }
 
   .my-reel {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .my-reel video {
+    display: block;
     width: 100% !important;
     max-width: 100% !important;
-    height: auto;
+    height: auto !important;
   }
 
   .profile-container button {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
     max-width: 100%;
   }
 }
