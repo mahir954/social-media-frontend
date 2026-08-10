@@ -59,7 +59,7 @@
   }
 
   .story-card {
-    min-width: 65px;
+    min-width: 75px;
   }
 
   .add-story-icon {
@@ -70,5 +70,12 @@
     justify-content: center;
     line-height: 1;
     box-sizing: border-box;
+    flex-shrink: 0;
+  }
+
+  .story-card p {
+    margin-top: 8px;
+    line-height: 16px;
+    display: block;
   }
 }
