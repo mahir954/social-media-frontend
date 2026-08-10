@@ -14,6 +14,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
         maxWidth: "600px",
         margin: "30px auto",
         padding: "20px",
+          color: "#222",
       }}
     >
       <h1>Settings</h1>
@@ -28,6 +29,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
           border: "1px solid #ddd",
           borderRadius: "8px",
           background: "white",
+            color: "#222",
           cursor: "pointer",
           textAlign: "left",
           fontSize: "16px",
@@ -46,6 +48,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
           border: "1px solid #ddd",
           borderRadius: "8px",
           background: "white",
+            color: "#222",
           cursor: "pointer",
           textAlign: "left",
           fontSize: "16px",
@@ -64,6 +67,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
           border: "1px solid #ddd",
           borderRadius: "8px",
           background: "white",
+            color: "#222",
           cursor: "pointer",
           textAlign: "left",
           fontSize: "16px",
@@ -98,7 +102,8 @@ const [confirmPassword, setConfirmPassword] = useState("");
       padding: "20px",
       border: "1px solid #ddd",
       borderRadius: "10px",
-      background: "#f9f9f9",
+     background: "#fff",
+        color: "#222",
     }}
   >
     <input
@@ -113,6 +118,8 @@ const [confirmPassword, setConfirmPassword] = useState("");
         padding: "10px",
         marginBottom: "10px",
         boxSizing: "border-box",
+           background: "#fff",
+        color: "#222",
       }}
     />
 
@@ -128,6 +135,8 @@ const [confirmPassword, setConfirmPassword] = useState("");
         padding: "10px",
         marginBottom: "10px",
         boxSizing: "border-box",
+           background: "#fff",
+        color: "#222",
       }}
     />
 
@@ -143,6 +152,8 @@ const [confirmPassword, setConfirmPassword] = useState("");
         padding: "10px",
         marginBottom: "10px",
         boxSizing: "border-box",
+           background: "#fff",
+        color: "#222",
       }}
     />
 
@@ -224,6 +235,7 @@ const [confirmPassword, setConfirmPassword] = useState("");
           border: "1px solid #ddd",
           borderRadius: "8px",
           background: "white",
+            color: "#222",
           cursor: "pointer",
           textAlign: "left",
           fontSize: "16px",
