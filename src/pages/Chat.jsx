@@ -1060,30 +1060,34 @@ const startCall = (type) => {
               }}
               />
 
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-                setIsTyping(e.target.value.length > 0);
-                
-                if (e.target.value.length > 0){
-                  socket.emit("typing");
+           <textarea
+  className="message-textarea"
+  value={message}
+  rows={1}
+  onChange={(e) => {
+    const value = e.target.value;
 
-                }else{
-                  socket.emit("stopTyping");
-                }
-                
+    setMessage(value);
+    setIsTyping(value.length > 0);
 
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  sendMessage();
-                }
-              }}
-              placeholder="Type your message..."
-            />
+    e.target.style.height = "auto";
+    e.target.style.height =
+      Math.min(e.target.scrollHeight, 110) + "px";
+
+    if (value.length > 0) {
+      socket.emit("typing");
+    } else {
+      socket.emit("stopTyping");
+    }
+  }}
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }}
+  placeholder="Message..."
+/>
             {recording ? (
   <>
     <span>
