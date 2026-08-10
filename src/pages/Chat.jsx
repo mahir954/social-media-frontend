@@ -93,10 +93,16 @@ const [cameraOn, setCameraOn] = useState(true);
   
     const fetchUsers = async () => {
       try {
-        const response = await fetch(
-          "https://social-media-backend-9fag.onrender.com/api/users"
-      
-        );
+       const token = localStorage.getItem("token");
+
+const response = await fetch(
+  "https://social-media-backend-9fag.onrender.com/api/messages/conversations/list",
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
         const data = await response.json();
 
