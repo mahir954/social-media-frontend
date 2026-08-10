@@ -982,7 +982,7 @@ if (highlightsResponse.ok) {
 
             <br />
             <br />
-
+             <div style={{ display: "flex", gap: "15px" }}>
             <button onClick={handleUpdateProfile}>
               Save Changes
             </button>
@@ -994,6 +994,7 @@ if (highlightsResponse.ok) {
             >
               Cancel
             </button>
+             </div>
           </div>
         ) : (
           (profileUserId === currentUserId ||
