@@ -51,50 +51,50 @@ if (!adminToken) {
 window.location.href = "/admin-login";
 return;
 }
-fetch("http://localhost:5000/api/admin/stats/users")
+fetch("https://social-media-backend-9fag.onrender.com/api/admin/stats/users")
 .then((response) => response.json())
 .then((data) =>{
     setTotalUsers(data.totalUsers);
 })
-fetch("http://localhost:5000/api/admin/stats/posts")
+fetch("https://social-media-backend-9fag.onrender.com/api/admin/stats/posts")
 .then((response) => response.json())
 .then((data) => {
 setTotalPosts(data.totalPosts);
 })
-fetch("http://localhost:5000/api/admin/stats/reels")
+fetch("https://social-media-backend-9fag.onrender.com/api/admin/stats/reels")
 .then((response) => response.json())
 .then((data) => {
 setTotalReels(data.totalReels);
 })
-fetch("http://localhost:5000/api/admin/stats/reports")
+fetch("https://social-media-backend-9fag.onrender.com/api/admin/stats/reports")
 .then((response) => response.json())
 .then((data) => {
 setTotalReports(data.totalReports);
 })
-fetch("http://localhost:5000/api/admin/users")
+fetch("https://social-media-backend-9fag.onrender.com/api/admin/users")
   .then((response) => response.json())
   .then((data) => {
     console.log("All Users:", data);
     setUsers(data);
   })
-  fetch("http://localhost:5000/api/admin/posts")
+  fetch("https://social-media-backend-9fag.onrender.com/api/admin/posts")
   .then((response) => response.json())
   .then((data) => {
     console.log("All Posts:", data);
     setPosts(data);
   })
-  fetch("http://localhost:5000/api/admin/reels")
+  fetch("https://social-media-backend-9fag.onrender.com/api/admin/reels")
   .then((response) => response.json())
   .then((data) => {
     console.log("All Reels:", data);
     setReels(data);
   })
-  fetch("http://localhost:5000/api/admin/reports")
+  fetch("https://social-media-backend-9fag.onrender.com/api/admin/reports")
   .then((response) => response.json())
   .then((data) => {
     setReports(data);
   })
-  fetch("http://localhost:5000/api/admin/comments")
+  fetch("https://social-media-backend-9fag.onrender.com/api/admin/comments")
   .then((response) => response.json())
   .then((data) => {
     setComments(data);
@@ -148,7 +148,7 @@ if (!confirmDelete) return;
 
 try {
 const response = await fetch(
-"http://localhost:5000/api/admin/users/${userId}",
+"https://social-media-backend-9fag.onrender.com/api/admin/users/${userId}",
 {
 method: "DELETE",
 }
@@ -174,7 +174,7 @@ alert("Failed to delete user");
 const handleBlockUser = async (userId) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/api/admin/users/${userId}/block`,
+      `https://social-media-backend-9fag.onrender.com/api/admin/users/${userId}/block`,
       {
         method: "PUT",
       }
@@ -211,7 +211,7 @@ if (!confirmDelete) return;
 try {
 
 const response = await fetch(
- `http://localhost:5000/api/admin/posts/${postId}`,
+ `https://social-media-backend-9fag.onrender.com/api/admin/posts/${postId}`,
   {
     method: "DELETE",
   }
@@ -249,7 +249,7 @@ if (!confirmDelete) return;
 try {
 
 const response = await fetch(
-  `http://localhost:5000/api/admin/reels/${reelId}`,
+  `https://social-media-backend-9fag.onrender.com/api/admin/reels/${reelId}`,
   {
     method: "DELETE",
   }
@@ -295,7 +295,7 @@ const handleDeleteReport = async (reportId) => {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/admin/reports/${reportId}`,
+      `https://social-media-backend-9fag.onrender.com/api/admin/reports/${reportId}`,
       {
         method: "DELETE",
       }
@@ -336,7 +336,7 @@ const handleDeleteComment = async (
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/admin/comments/${type}/${parentId}/${commentId}`,
+      `https://social-media-backend-9fag.onrender.com/api/admin/comments/${type}/${parentId}/${commentId}`,
       {
         method: "DELETE",
       }
@@ -365,7 +365,7 @@ const handleDeleteComment = async (
 const handleChangeAdminPassword = async () => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/admin/change-password",
+      "https://social-media-backend-9fag.onrender.com/api/admin/change-password",
       {
         method: "PUT",
         headers: {
@@ -398,7 +398,7 @@ const handleChangeAdminPassword = async () => {
 const handleExportUsers = async () => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/admin/export/users"
+      "https://social-media-backend-9fag.onrender.com/api/admin/export/users"
     );
 
     const users = await response.json();
@@ -445,7 +445,7 @@ const handleExportUsers = async () => {
 const handleBackupDatabase = async () => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/admin/backup"
+      "https://social-media-backend-9fag.onrender.com/api/admin/backup"
     );
 
     const blob = await response.blob();
@@ -467,7 +467,7 @@ const handleBackupDatabase = async () => {
 const handleExportReport = async () => {
   try {
     const response = await fetch(
-      "http://localhost:5000/api/admin/export/report"
+      "https://social-media-backend-9fag.onrender.com/api/admin/export/report"
     );
 
     const blob = await response.blob();
@@ -654,7 +654,7 @@ return (
     <img
       src={
         user.profilePic
-          ? `http://localhost:5000${user.profilePic}`
+          ? `https://social-media-backend-9fag.onrender.com${user.profilePic}`
           : "https://randomuser.me/api/portraits/men/1.jpg"
       }
       alt="Profile"
@@ -724,7 +724,7 @@ return (
     <img
       src={
         selectedUser.profilePic
-          ? `http://localhost:5000${selectedUser.profilePic}`
+          ? `https://social-media-backend-9fag.onrender.com${selectedUser.profilePic}`
           : "https://randomuser.me/api/portraits/men/1.jpg"
       }
       alt="Profile"
@@ -780,7 +780,7 @@ return (
 
         {post.image && (
           <img
-            src={`http://localhost:5000${post.image}`}
+            src={`https://social-media-backend-9fag.onrender.com${post.image}`}
             alt="Post"
             style={{
               width: "120px",
@@ -806,7 +806,7 @@ return (
 
         {reel.video && (
           <video
-            src={`http://localhost:5000/uploads/${reel.video}`}
+            src={`https://social-media-backend-9fag.onrender.com/uploads/${reel.video}`}
             controls
             preload="metadata"
             style={{
@@ -881,7 +881,7 @@ return (
           <img
             src={
               post.user?.profilePic
-                ? `http://localhost:5000${post.user.profilePic}`
+                ? `https://social-media-backend-9fag.onrender.com${post.user.profilePic}`
                 : "https://randomuser.me/api/portraits/men/1.jpg"
             }
             alt="Profile"
@@ -907,7 +907,7 @@ return (
         <td>
           {post.image && (
             <img
-              src={`http://localhost:5000${post.image}`}
+              src={`https://social-media-backend-9fag.onrender.com${post.image}`}
               alt="Post"
               style={{
                 width: "100px",
@@ -993,7 +993,7 @@ reel.user?.name?.toLowerCase()
 src={
 reel.user?.profilePic
 ?
-`http://localhost:5000${reel.user.profilePic}`
+`https://social-media-backend-9fag.onrender.com${reel.user.profilePic}`
 :
 "https://randomuser.me/api/portraits/men/1.jpg"
 }
@@ -1015,7 +1015,7 @@ objectFit:"cover"
 
 <td>
 <video
-src={`http://localhost:5000/uploads/${reel.video}`}
+src={`https://social-media-backend-9fag.onrender.com/uploads/${reel.video}`}
 controls
 style={{
 width:"120px",
