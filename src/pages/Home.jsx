@@ -4,23 +4,25 @@ import Sidebar from "../components/layout/Sidebar";
 import Stories from "../components/story/Stories";
 import CreatePost from "../components/feed/CreatePost";
 import HomeFeed from "../components/feed/HomeFeed";
+import "../styles/home.css";
 
 function Home() {
   return (
     <>
       <Navbar />
 
-      <div style={{ display: "flex" }}>
-        <Sidebar />
+      <div className="home-layout">
+  <Sidebar />
 
-        <div style={{ marginLeft: "20px" }}>
-          <h1>Home Feed</h1>
-          <p>Welcome to Social Media App</p>
-          <Stories />
-          <CreatePost />
-          <HomeFeed />
-        </div>
-      </div>
+  <main className="home-content">
+    <h1>Home Feed</h1>
+    <p>Welcome to Social Media App</p>
+
+    <Stories />
+    <CreatePost />
+    <HomeFeed />
+  </main>
+</div>
 
       <Footer />
     </>
