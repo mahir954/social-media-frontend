@@ -87,52 +87,60 @@ const [cameraOn, setCameraOn] = useState(true);
   
 
   // Fetch Users
-  useEffect(() => {
-    
-    
-  
-    const fetchUsers = async () => {
-      try {
-       const token = localStorage.getItem("token");
+ useEffect(() => {
+  const fetchUsers = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-const response = await fetch(
-  "https://social-media-backend-9fag.onrender.com/api/messages/conversations/list",
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          console.error(data.message);
-          return;
-        }
-          setUsers(data.users);
-          if (selectedUserId) {
-  const user = data.users.find(
-    (user) => user._id === selectedUserId
-  );
-
-  if (user) {
-    setSelectedUser(user);
-  }
-}
-         
-      } catch (error) {
-        console.error("Users Error:", error);
+      if (!token) {
+        console.error("Token not found");
+        return;
       }
-    };
 
-    fetchUsers();
-    const interval = setInterval(fetchUsers, 5000);
+      const response = await fetch(
+        "https://social-media-backend-9fag.onrender.com/api/messages/conversations/list",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error(data.message);
+        return;
+      }
+
+      const conversationUsers = data.conversations.map(
+        (conversation) => conversation.user
+      );
+
+      setUsers(conversationUsers);
+
+      if (selectedUserId) {
+        const user = conversationUsers.find(
+          (user) => user._id === selectedUserId
+        );
+
+        if (user) {
+          setSelectedUser(user);
+        }
+      }
+    } catch (error) {
+      console.error("Conversations Error:", error);
+    }
+  };
+
+  fetchUsers();
+
+  const interval = setInterval(fetchUsers, 5000);
+
   return () => {
     clearInterval(interval);
-    
   };
-  }, [selectedUserId]);
+}, [selectedUserId]);
 
   // Fetch Messages
   useEffect(() => {
