@@ -24,6 +24,7 @@ import Reels from "./pages/Reels";
 import Note from "./components/Note";
 
 function App() {
+  const token = localStorage.getItem("token");
   return (
     <Routes>
 
@@ -32,7 +33,14 @@ function App() {
       <Route path="/admin-login" element={<AdminLogin />} />
 
       {/* Authentication */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route
+  path="/"
+  element={
+    token
+      ? <Navigate to="/home" replace />
+      : <Navigate to="/login" replace />
+  }
+/>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset-password/:token" element={<ResetPassword />} />
