@@ -17,6 +17,26 @@ const [confirmPassword, setConfirmPassword] = useState("");
           color: "#222",
       }}
     >
+        <button
+  onClick={() => navigate(-1)}
+  style={{
+    width: "45px",
+    height: "45px",
+    border: "none",
+    borderRadius: "50%",
+    background: "#1877f2",
+    color: "white",
+    fontSize: "28px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "10px",
+  }}
+>
+  ←
+</button>
       <h1>Settings</h1>
 
       <button
