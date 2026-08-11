@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/explore.css";
 
 
 function Explore() {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [likedposts, setLikedPosts] = useState([]);
   const [comments, setComments] = useState({});
@@ -235,6 +237,26 @@ const editComment = async (postId, commentId, oldText) => {
   return (
     <div
     className="explore-container">
+      <button
+  onClick={() => navigate(-1)}
+  style={{
+    width: "45px",
+    height: "45px",
+    border: "none",
+    borderRadius: "50%",
+    background: "#1877f2",
+    color: "white",
+    fontSize: "28px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "10px",
+  }}
+>
+  ←
+</button>
       <h1>Explore</h1>
 
       <h2>Explore Posts</h2>
