@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/chat.css";
 import Note from "../components/Note";
 import { io } from "socket.io-client";
@@ -9,6 +10,7 @@ import VideoCall from "../components/Call/VideoCall";
 import CallControls from "../components/Call/CallControls";
 
 function Chat() {
+  const navigate = useNavigate();   
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedUserId = searchParams.get("userId");
   
@@ -590,6 +592,26 @@ const startCall = (type) => {
 
   return (
     <div className="chat-container">
+      <button
+  onClick={() => navigate(-1)}
+  style={{
+    width: "45px",
+    height: "45px",
+    border: "none",
+    borderRadius: "50%",
+    background: "#1877f2",
+    color: "white",
+    fontSize: "28px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "10px",
+  }}
+>
+  ←
+</button>
       <Note />
       <IncomingCall
   visible={incomingCall}
