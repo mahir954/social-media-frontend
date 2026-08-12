@@ -25,8 +25,7 @@ import Reels from "./pages/Reels";
 
 import Note from "./components/Note";
 import LiveStream from "./pages/LiveStream";
-import LiveVideo from "../components/LiveVideo";
-import LiveChat from "../components/LiveChat";
+
 
 function App() {
   const token = localStorage.getItem("token");
