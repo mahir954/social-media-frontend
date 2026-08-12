@@ -9,18 +9,19 @@ function InstallPage() {
   const [installed, setInstalled] = useState(false);
 
   useEffect(() => {
-    // Chrome/Android install prompt available
     const handleBeforeInstallPrompt = (event) => {
+      // Prevent Chrome from showing the prompt automatically
       event.preventDefault();
 
-      console.log("PWA install prompt available");
+      console.log("Fello install prompt available");
 
       setDeferredPrompt(event);
     };
 
-    // This event means browser reports that installation completed
     const handleAppInstalled = () => {
-      console.log("Fello Social installation completed");
+      // This is the only place where we mark
+      // the app as actually installed.
+      console.log("Fello Social installed");
 
       setInstalling(false);
       setInstalled(true);
@@ -37,13 +38,15 @@ function InstallPage() {
       handleAppInstalled
     );
 
-    // Check whether this page is already running
-    // as an installed PWA
-    const isStandalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
+    // Check whether Fello is already running
+    // as an installed PWA.
+    const standalone =
+      window.matchMedia(
+        "(display-mode: standalone)"
+      ).matches ||
       window.navigator.standalone === true;
 
-    if (isStandalone) {
+    if (standalone) {
       setInstalled(true);
       setInstalling(false);
     }
@@ -61,10 +64,6 @@ function InstallPage() {
     };
   }, []);
 
-  // -----------------------------------------
-  // INSTALL BUTTON
-  // -----------------------------------------
-
   const installApp = async () => {
     if (!deferredPrompt) {
       alert(
@@ -77,25 +76,29 @@ function InstallPage() {
       // Open Chrome's native Install / Cancel dialog
       deferredPrompt.prompt();
 
-      // IMPORTANT:
-      // accepted means only that user clicked Install.
-      // It does NOT mean installation has completed.
+      // Wait for user's choice
       const result = await deferredPrompt.userChoice;
 
-      console.log("Chrome install choice:", result.outcome);
+      console.log(
+        "Install choice:",
+        result.outcome
+      );
 
       if (result.outcome === "accepted") {
-        // Only show Installing.
-        // Do NOT show 100% here.
+        // User pressed Install.
+        // Installation is NOT considered complete yet.
         setInstalling(true);
         setInstalled(false);
       } else {
-        // User clicked Cancel
+        // User pressed Cancel.
         setInstalling(false);
         setInstalled(false);
       }
     } catch (error) {
-      console.error("Installation error:", error);
+      console.error(
+        "PWA installation error:",
+        error
+      );
 
       setInstalling(false);
       setInstalled(false);
@@ -104,22 +107,10 @@ function InstallPage() {
     setDeferredPrompt(null);
   };
 
-  // -----------------------------------------
-  // OPEN APP
-  // -----------------------------------------
-
   const openApp = () => {
-    /*
-      The PWA's start_url is "/".
-      When launched from the installed PWA,
-      this opens the app's starting page.
-    */
+    // Open the PWA start URL.
     window.location.href = "/";
   };
-
-  // -----------------------------------------
-  // CANCEL AFTER INSTALL
-  // -----------------------------------------
 
   const cancelInstalled = () => {
     setInstalled(false);
@@ -146,9 +137,10 @@ function InstallPage() {
           Connect, Share & Chat with your friends
         </p>
 
-        {/* ==================================
+        {/* =========================
             INSTALLING
-        ================================== */}
+        ========================== */}
+
         {installing && !installed && (
           <div style={styles.installingBox}>
 
@@ -162,7 +154,7 @@ function InstallPage() {
               Please wait while the app is being installed.
             </p>
 
-            {/* Indeterminate progress bar */}
+            {/* Animated loading bar */}
             <div style={styles.progressBackground}>
               <div style={styles.progressMoving}></div>
             </div>
@@ -174,13 +166,13 @@ function InstallPage() {
           </div>
         )}
 
-        {/* ==================================
+        {/* =========================
             INSTALLATION COMPLETE
-        ================================== */}
+        ========================== */}
+
         {installed && (
           <div style={styles.installedBox}>
 
-            {/* CHECK */}
             <div style={styles.checkCircle}>
               ✓
             </div>
@@ -193,7 +185,7 @@ function InstallPage() {
               Installation completed successfully.
             </p>
 
-            {/* REAL COMPLETION */}
+            {/* 100% ONLY AFTER appinstalled */}
             <div style={styles.progressBackground}>
               <div style={styles.progressComplete}></div>
             </div>
@@ -226,9 +218,10 @@ function InstallPage() {
           </div>
         )}
 
-        {/* ==================================
+        {/* =========================
             INSTALL BUTTON
-        ================================== */}
+        ========================== */}
+
         {!installing && !installed && (
           <button
             type="button"
@@ -239,9 +232,10 @@ function InstallPage() {
           </button>
         )}
 
-        {/* ==================================
-            CONTINUE TO WEBSITE
-        ================================== */}
+        {/* =========================
+            WEBSITE BUTTON
+        ========================== */}
+
         {!installing && !installed && (
           <button
             type="button"
@@ -252,7 +246,6 @@ function InstallPage() {
           </button>
         )}
 
-        {/* FOOTER */}
         <p style={styles.smallText}>
           Install Fello Social for a faster and better experience.
         </p>
@@ -307,8 +300,6 @@ const styles = {
     marginBottom: "30px",
   },
 
-  /* INSTALL BUTTON */
-
   installButton: {
     width: "100%",
     padding: "15px",
@@ -322,8 +313,6 @@ const styles = {
     marginBottom: "12px",
   },
 
-  /* WEBSITE BUTTON */
-
   loginButton: {
     width: "100%",
     padding: "15px",
@@ -335,8 +324,6 @@ const styles = {
     fontWeight: "600",
     cursor: "pointer",
   },
-
-  /* INSTALLING */
 
   installingBox: {
     width: "100%",
@@ -399,8 +386,6 @@ const styles = {
     color: "#666666",
   },
 
-  /* INSTALLED */
-
   installedBox: {
     width: "100%",
     marginBottom: "20px",
@@ -439,8 +424,6 @@ const styles = {
     color: "#666666",
     fontWeight: "600",
   },
-
-  /* OPEN / CANCEL */
 
   actionButtons: {
     display: "flex",
