@@ -41,7 +41,9 @@ function App() {
       : <Navigate to="/login" replace />
   }
 />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={
+      token ? <Navigate to="/home" replace /> :
+      <Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset-password/:token" element={<ResetPassword />} />
 
