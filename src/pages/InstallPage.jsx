@@ -6,11 +6,9 @@ function InstallPage() {
 
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [installing, setInstalling] = useState(false);
-  const [installed, setInstalled] = useState(false);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event) => {
-      // Prevent Chrome from showing the prompt automatically
       event.preventDefault();
 
       console.log("Fello install prompt available");
@@ -18,48 +16,15 @@ function InstallPage() {
       setDeferredPrompt(event);
     };
 
-    const handleAppInstalled = () => {
-      // This is the only place where we mark
-      // the app as actually installed.
-      console.log("Fello Social installed");
-
-      setInstalling(false);
-      setInstalled(true);
-      setDeferredPrompt(null);
-    };
-
     window.addEventListener(
       "beforeinstallprompt",
       handleBeforeInstallPrompt
     );
 
-    window.addEventListener(
-      "appinstalled",
-      handleAppInstalled
-    );
-
-    // Check whether Fello is already running
-    // as an installed PWA.
-    const standalone =
-      window.matchMedia(
-        "(display-mode: standalone)"
-      ).matches ||
-      window.navigator.standalone === true;
-
-    if (standalone) {
-      setInstalled(true);
-      setInstalling(false);
-    }
-
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
         handleBeforeInstallPrompt
-      );
-
-      window.removeEventListener(
-        "appinstalled",
-        handleAppInstalled
       );
     };
   }, []);
@@ -73,62 +38,41 @@ function InstallPage() {
     }
 
     try {
-      // Open Chrome's native Install / Cancel dialog
+      // Chrome ka actual Install / Cancel popup
       deferredPrompt.prompt();
 
-      // Wait for user's choice
       const result = await deferredPrompt.userChoice;
 
-      console.log(
-        "Install choice:",
-        result.outcome
-      );
+      console.log("Install choice:", result.outcome);
 
       if (result.outcome === "accepted") {
-        // User pressed Install.
-        // Installation is NOT considered complete yet.
+        // Sirf installing message dikhayenge.
+        // 100% ya Installed nahi dikhayenge.
         setInstalling(true);
-        setInstalled(false);
       } else {
-        // User pressed Cancel.
+        // User ne Cancel kiya
         setInstalling(false);
-        setInstalled(false);
       }
     } catch (error) {
-      console.error(
-        "PWA installation error:",
-        error
-      );
-
+      console.error("Install error:", error);
       setInstalling(false);
-      setInstalled(false);
     }
 
     setDeferredPrompt(null);
-  };
-
-  const openApp = () => {
-    // Open the PWA start URL.
-    window.location.href = "/";
-  };
-
-  const cancelInstalled = () => {
-    setInstalled(false);
-    setInstalling(false);
   };
 
   return (
     <div style={styles.container}>
       <div style={styles.card}>
 
-        {/* APP ICON */}
+        {/* App Icon */}
         <img
           src="/fello-icon.png.jpeg"
           alt="Fello Social"
           style={styles.icon}
         />
 
-        {/* APP NAME */}
+        {/* App Name */}
         <h1 style={styles.title}>
           Fello Social
         </h1>
@@ -137,11 +81,8 @@ function InstallPage() {
           Connect, Share & Chat with your friends
         </p>
 
-        {/* =========================
-            INSTALLING
-        ========================== */}
-
-        {installing && !installed && (
+        {/* Installing */}
+        {installing ? (
           <div style={styles.installingBox}>
 
             <div style={styles.spinner}></div>
@@ -154,96 +95,35 @@ function InstallPage() {
               Please wait while the app is being installed.
             </p>
 
-            {/* Animated loading bar */}
             <div style={styles.progressBackground}>
               <div style={styles.progressMoving}></div>
             </div>
 
             <p style={styles.waitText}>
-              Installing...
+              Installation in progress...
             </p>
 
           </div>
-        )}
+        ) : (
+          <>
+            {/* Install Button */}
+            <button
+              type="button"
+              onClick={installApp}
+              style={styles.installButton}
+            >
+              📲 Install Fello Social
+            </button>
 
-        {/* =========================
-            INSTALLATION COMPLETE
-        ========================== */}
-
-        {installed && (
-          <div style={styles.installedBox}>
-
-            <div style={styles.checkCircle}>
-              ✓
-            </div>
-
-            <h3 style={styles.installedTitle}>
-              Fello Social Installed
-            </h3>
-
-            <p style={styles.installedText}>
-              Installation completed successfully.
-            </p>
-
-            {/* 100% ONLY AFTER appinstalled */}
-            <div style={styles.progressBackground}>
-              <div style={styles.progressComplete}></div>
-            </div>
-
-            <p style={styles.progressText}>
-              100%
-            </p>
-
-            {/* OPEN + CANCEL */}
-            <div style={styles.actionButtons}>
-
-              <button
-                type="button"
-                onClick={openApp}
-                style={styles.openButton}
-              >
-                📱 Open
-              </button>
-
-              <button
-                type="button"
-                onClick={cancelInstalled}
-                style={styles.cancelButton}
-              >
-                Cancel
-              </button>
-
-            </div>
-
-          </div>
-        )}
-
-        {/* =========================
-            INSTALL BUTTON
-        ========================== */}
-
-        {!installing && !installed && (
-          <button
-            type="button"
-            onClick={installApp}
-            style={styles.installButton}
-          >
-            📲 Install Fello Social
-          </button>
-        )}
-
-        {/* =========================
-            WEBSITE BUTTON
-        ========================== */}
-
-        {!installing && !installed && (
-          <button
-            type="button"
-            onClick={() => navigate("/login")}
-            style={styles.loginButton}
-          >
-            Continue to Website
-          </button>
+            {/* Continue Website */}
+            <button
+              type="button"
+              onClick={() => navigate("/login")}
+              style={styles.loginButton}
+            >
+              Continue to Website
+            </button>
+          </>
         )}
 
         <p style={styles.smallText}>
@@ -373,86 +253,10 @@ const styles = {
     animation: "felloProgress 1.4s ease-in-out infinite",
   },
 
-  progressComplete: {
-    width: "100%",
-    height: "100%",
-    background: "#111111",
-    borderRadius: "10px",
-  },
-
   waitText: {
     marginTop: "9px",
     fontSize: "13px",
     color: "#666666",
-  },
-
-  installedBox: {
-    width: "100%",
-    marginBottom: "20px",
-  },
-
-  checkCircle: {
-    width: "58px",
-    height: "58px",
-    margin: "0 auto 13px",
-    borderRadius: "50%",
-    background: "#111111",
-    color: "#ffffff",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "30px",
-    fontWeight: "700",
-  },
-
-  installedTitle: {
-    margin: "0 0 7px",
-    fontSize: "19px",
-    fontWeight: "700",
-    color: "#111111",
-  },
-
-  installedText: {
-    margin: "0 0 16px",
-    fontSize: "13px",
-    color: "#777777",
-  },
-
-  progressText: {
-    margin: "8px 0 0",
-    fontSize: "13px",
-    color: "#666666",
-    fontWeight: "600",
-  },
-
-  actionButtons: {
-    display: "flex",
-    gap: "10px",
-    marginTop: "17px",
-  },
-
-  openButton: {
-    flex: "1",
-    padding: "14px",
-    border: "none",
-    borderRadius: "10px",
-    background: "#111111",
-    color: "#ffffff",
-    fontSize: "16px",
-    fontWeight: "600",
-    cursor: "pointer",
-  },
-
-  cancelButton: {
-    flex: "1",
-    padding: "14px",
-    border: "1px solid #dddddd",
-    borderRadius: "10px",
-    background: "#ffffff",
-    color: "#111111",
-    fontSize: "16px",
-    fontWeight: "600",
-    cursor: "pointer",
   },
 
   smallText: {
