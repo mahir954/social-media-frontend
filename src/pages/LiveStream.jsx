@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
 import "../styles/liveStream.css";
+import LiveVideo from "../components/LiveVideo";
+import LiveChat from "../components/LiveChat";
 
 const SOCKET_URL =
   import.meta.env.VITE_SOCKET_URL ||
