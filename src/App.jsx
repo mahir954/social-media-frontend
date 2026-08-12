@@ -2,6 +2,7 @@ import Admin from "../admin/Admin";
 import AdminLogin from "../admin/AdminLogin";
 
 import { Routes, Route, Navigate } from "react-router-dom";
+
 import InstallPage from "./pages/InstallPage";
 
 import Home from "./pages/Home";
@@ -26,59 +27,185 @@ import Note from "./components/Note";
 
 function App() {
   const token = localStorage.getItem("token");
+
   return (
     <Routes>
 
-      {/* Admin */}
+      {/* ================= ADMIN ================= */}
+
       <Route path="/admin" element={<Admin />} />
-      <Route path="/admin-login" element={<AdminLogin />} />
 
-      {/* Authentication */}
-      <Route path="/" element={<InstallPage />} />
-      <Route path="/login" element={
-      token ? <Navigate to="/home" replace /> :
-      <Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/reset-password/:token" element={<ResetPassword />} />
+      <Route
+        path="/admin-login"
+        element={<AdminLogin />}
+      />
 
-      {/* Profile */}
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/profile/:userId" element={<Profile />} />
 
-      {/* Stories */}
-      <Route path="/create-story" element={<CreateStory />} />
-      <Route path="/story/:storyId" element={<StoryViewer />} />
+      {/* ================= INSTALL PAGE ================= */}
+      {/* Install page sirf /install link par open hoga */}
 
-      {/* Explore */}
-      <Route path="/explore" element={<Explore />} />
+      <Route
+        path="/install"
+        element={<InstallPage />}
+      />
 
-      {/* Chat */}
-      <Route path="/chat" element={<Chat />} />
 
-      {/* Notifications */}
-      <Route path="/notifications" element={<Notifications />} />
+      {/* ================= AUTHENTICATION ================= */}
 
-      {/* Settings */}
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/blocked-users" element={<BlockedUsers />} />
-      <Route path="/switch-account" element={<SwitchAccount />} />
+      {/* App open hone par:
+          Login nahi hai → Login
+          Login hai → Home
+      */}
 
-      {/* Reels */}
-      <Route path="/reels" element={<Reels />} />
-      <Route path="/reels/:reelId" element={<Reels />} />
+      <Route
+        path="/"
+        element={
+          token ? (
+            <Navigate to="/home" replace />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      />
 
-      {/* Music */}
-      <Route path="/music-upload" element={<MusicUpload />} />
-      <Route path="/music-library" element={<MusicLibrary />} />
+      <Route
+        path="/login"
+        element={
+          token ? (
+            <Navigate to="/home" replace />
+          ) : (
+            <Login />
+          )
+        }
+      />
 
-      {/* Notes */}
-      <Route path="/notes" element={<Note />} />
+      <Route
+        path="/register"
+        element={<Register />}
+      />
 
-      {/* Home */}
-      <Route path="/home" element={<Home />} />
+      <Route
+        path="/reset-password/:token"
+        element={<ResetPassword />}
+      />
 
-      {/* 404 - Always keep this last */}
-      <Route path="*" element={<NotFound />} />
+
+      {/* ================= PROFILE ================= */}
+
+      <Route
+        path="/profile"
+        element={<Profile />}
+      />
+
+      <Route
+        path="/profile/:userId"
+        element={<Profile />}
+      />
+
+
+      {/* ================= STORIES ================= */}
+
+      <Route
+        path="/create-story"
+        element={<CreateStory />}
+      />
+
+      <Route
+        path="/story/:storyId"
+        element={<StoryViewer />}
+      />
+
+
+      {/* ================= EXPLORE ================= */}
+
+      <Route
+        path="/explore"
+        element={<Explore />}
+      />
+
+
+      {/* ================= CHAT ================= */}
+
+      <Route
+        path="/chat"
+        element={<Chat />}
+      />
+
+
+      {/* ================= NOTIFICATIONS ================= */}
+
+      <Route
+        path="/notifications"
+        element={<Notifications />}
+      />
+
+
+      {/* ================= SETTINGS ================= */}
+
+      <Route
+        path="/settings"
+        element={<Settings />}
+      />
+
+      <Route
+        path="/blocked-users"
+        element={<BlockedUsers />}
+      />
+
+      <Route
+        path="/switch-account"
+        element={<SwitchAccount />}
+      />
+
+
+      {/* ================= REELS ================= */}
+
+      <Route
+        path="/reels"
+        element={<Reels />}
+      />
+
+      <Route
+        path="/reels/:reelId"
+        element={<Reels />}
+      />
+
+
+      {/* ================= MUSIC ================= */}
+
+      <Route
+        path="/music-upload"
+        element={<MusicUpload />}
+      />
+
+      <Route
+        path="/music-library"
+        element={<MusicLibrary />}
+      />
+
+
+      {/* ================= NOTES ================= */}
+
+      <Route
+        path="/notes"
+        element={<Note />}
+      />
+
+
+      {/* ================= HOME ================= */}
+
+      <Route
+        path="/home"
+        element={<Home />}
+      />
+
+
+      {/* ================= 404 ================= */}
+
+      <Route
+        path="*"
+        element={<NotFound />}
+      />
 
     </Routes>
   );
