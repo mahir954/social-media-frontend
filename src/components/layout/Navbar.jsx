@@ -4,6 +4,7 @@ import "../../styles/navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -223,7 +224,19 @@ useEffect(() => {
 
   return (
     <nav className="navbar">
-      <h2>Social Media App</h2>
+
+      <div className="navbar-header">
+
+        <h2>Social Media App</h2>
+
+        <button
+          className="menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
+
+      </div>
 
       {/* Global User Search */}
       <div className="user-search">
@@ -343,7 +356,7 @@ useEffect(() => {
         )}
       </div>
 
-      <div className="navbar-links">
+      <div className={`navbar-links ${menuOpen ? "menu-open" : ""}`}>
         <Link to="/">Home</Link>
 
         <Link to="/profile">Profile</Link>
