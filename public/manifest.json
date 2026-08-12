@@ -8,9 +8,6 @@
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "orientation": "portrait",
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  },
   "icons": [
     {
       "src": "/fello-icon.png.jpeg",
