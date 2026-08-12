@@ -2,6 +2,7 @@ import Admin from "../admin/Admin";
 import AdminLogin from "../admin/AdminLogin";
 
 import { Routes, Route, Navigate } from "react-router-dom";
+import InstallPage from " ./pages/InstallPage";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -33,14 +34,7 @@ function App() {
       <Route path="/admin-login" element={<AdminLogin />} />
 
       {/* Authentication */}
-      <Route
-  path="/"
-  element={
-    token
-      ? <Navigate to="/home" replace />
-      : <Navigate to="/login" replace />
-  }
-/>
+      <Route path="/" element={<InstallPage />} />
       <Route path="/login" element={
       token ? <Navigate to="/home" replace /> :
       <Login />} />
