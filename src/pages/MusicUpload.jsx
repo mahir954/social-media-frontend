@@ -43,7 +43,7 @@ function MusicUpload() {
         {
           method: "POST",
           headers: {
-      Authorization: Bearer ${localStorage.getItem("adminToken")},
+      Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
     },
           body: formData,
         }
