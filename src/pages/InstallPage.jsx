@@ -7,10 +7,9 @@ function InstallPage() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [installing, setInstalling] = useState(false);
   const [installed, setInstalled] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Chrome gives this event when PWA can be installed
+    // Chrome/Android install prompt available
     const handleBeforeInstallPrompt = (event) => {
       event.preventDefault();
 
@@ -19,13 +18,12 @@ function InstallPage() {
       setDeferredPrompt(event);
     };
 
-    // This fires only after the PWA is actually installed
+    // This event means browser reports that installation completed
     const handleAppInstalled = () => {
-      console.log("Fello Social installed successfully");
+      console.log("Fello Social installation completed");
 
       setInstalling(false);
       setInstalled(true);
-      setProgress(100);
       setDeferredPrompt(null);
     };
 
@@ -39,12 +37,15 @@ function InstallPage() {
       handleAppInstalled
     );
 
-    // Check if already running as installed PWA
-    if (
-      window.matchMedia("(display-mode: standalone)").matches
-    ) {
+    // Check whether this page is already running
+    // as an installed PWA
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true;
+
+    if (isStandalone) {
       setInstalled(true);
-      setProgress(100);
+      setInstalling(false);
     }
 
     return () => {
@@ -60,53 +61,69 @@ function InstallPage() {
     };
   }, []);
 
-  // INSTALL APP
+  // -----------------------------------------
+  // INSTALL BUTTON
+  // -----------------------------------------
+
   const installApp = async () => {
     if (!deferredPrompt) {
       alert(
-        "Install prompt available nahi hai. Chrome ke ⋮ menu se Install app select karein."
+        "Install option abhi available nahi hai. Chrome ke menu (⋮) se Install app select karein."
       );
       return;
     }
 
-    // Open Chrome's native Install / Cancel dialog
-    deferredPrompt.prompt();
+    try {
+      // Open Chrome's native Install / Cancel dialog
+      deferredPrompt.prompt();
 
-    // Wait for user's choice
-    const result = await deferredPrompt.userChoice;
+      // IMPORTANT:
+      // accepted means only that user clicked Install.
+      // It does NOT mean installation has completed.
+      const result = await deferredPrompt.userChoice;
 
-    console.log("Install result:", result.outcome);
+      console.log("Chrome install choice:", result.outcome);
 
-    if (result.outcome === "accepted") {
-      // User clicked Install
-      setInstalling(true);
+      if (result.outcome === "accepted") {
+        // Only show Installing.
+        // Do NOT show 100% here.
+        setInstalling(true);
+        setInstalled(false);
+      } else {
+        // User clicked Cancel
+        setInstalling(false);
+        setInstalled(false);
+      }
+    } catch (error) {
+      console.error("Installation error:", error);
 
-      // Real installation percentage browser provide nahi karta.
-      // Isliye actual percentage claim nahi kar rahe.
-      setProgress(0);
-    } else {
-      // User clicked Cancel
       setInstalling(false);
-      setProgress(0);
+      setInstalled(false);
     }
 
     setDeferredPrompt(null);
   };
 
-  // OPEN INSTALLED APP
+  // -----------------------------------------
+  // OPEN APP
+  // -----------------------------------------
+
   const openApp = () => {
     /*
-      If already running as standalone PWA,
-      simply go to home.
+      The PWA's start_url is "/".
+      When launched from the installed PWA,
+      this opens the app's starting page.
     */
     window.location.href = "/";
   };
 
+  // -----------------------------------------
   // CANCEL AFTER INSTALL
+  // -----------------------------------------
+
   const cancelInstalled = () => {
     setInstalled(false);
     setInstalling(false);
-    setProgress(0);
   };
 
   return (
@@ -129,15 +146,13 @@ function InstallPage() {
           Connect, Share & Chat with your friends
         </p>
 
-        {/* =========================
+        {/* ==================================
             INSTALLING
-        ========================== */}
+        ================================== */}
         {installing && !installed && (
           <div style={styles.installingBox}>
 
-            <div style={styles.loadingCircle}>
-              <div style={styles.loadingDot} />
-            </div>
+            <div style={styles.spinner}></div>
 
             <h3 style={styles.installingTitle}>
               Installing Fello Social...
@@ -147,13 +162,9 @@ function InstallPage() {
               Please wait while the app is being installed.
             </p>
 
+            {/* Indeterminate progress bar */}
             <div style={styles.progressBackground}>
-              <div
-                style={{
-                  ...styles.progressBar,
-                  width: "60%",
-                }}
-              />
+              <div style={styles.progressMoving}></div>
             </div>
 
             <p style={styles.waitText}>
@@ -163,12 +174,13 @@ function InstallPage() {
           </div>
         )}
 
-        {/* =========================
-            INSTALLED SUCCESSFULLY
-        ========================== */}
+        {/* ==================================
+            INSTALLATION COMPLETE
+        ================================== */}
         {installed && (
           <div style={styles.installedBox}>
 
+            {/* CHECK */}
             <div style={styles.checkCircle}>
               ✓
             </div>
@@ -181,14 +193,9 @@ function InstallPage() {
               Installation completed successfully.
             </p>
 
-            {/* 100% */}
+            {/* REAL COMPLETION */}
             <div style={styles.progressBackground}>
-              <div
-                style={{
-                  ...styles.progressBar,
-                  width: "100%",
-                }}
-              />
+              <div style={styles.progressComplete}></div>
             </div>
 
             <p style={styles.progressText}>
@@ -199,6 +206,7 @@ function InstallPage() {
             <div style={styles.actionButtons}>
 
               <button
+                type="button"
                 onClick={openApp}
                 style={styles.openButton}
               >
@@ -206,6 +214,7 @@ function InstallPage() {
               </button>
 
               <button
+                type="button"
                 onClick={cancelInstalled}
                 style={styles.cancelButton}
               >
@@ -217,11 +226,12 @@ function InstallPage() {
           </div>
         )}
 
-        {/* =========================
+        {/* ==================================
             INSTALL BUTTON
-        ========================== */}
+        ================================== */}
         {!installing && !installed && (
           <button
+            type="button"
             onClick={installApp}
             style={styles.installButton}
           >
@@ -229,11 +239,12 @@ function InstallPage() {
           </button>
         )}
 
-        {/* =========================
+        {/* ==================================
             CONTINUE TO WEBSITE
-        ========================== */}
+        ================================== */}
         {!installing && !installed && (
           <button
+            type="button"
             onClick={() => navigate("/login")}
             style={styles.loginButton}
           >
@@ -241,7 +252,7 @@ function InstallPage() {
           </button>
         )}
 
-        {/* FOOTER TEXT */}
+        {/* FOOTER */}
         <p style={styles.smallText}>
           Install Fello Social for a faster and better experience.
         </p>
@@ -250,10 +261,6 @@ function InstallPage() {
     </div>
   );
 }
-
-/* =====================================
-   STYLES
-===================================== */
 
 const styles = {
   container: {
@@ -274,7 +281,7 @@ const styles = {
     borderRadius: "22px",
     padding: "35px 25px",
     textAlign: "center",
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.12)",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
     boxSizing: "border-box",
   },
 
@@ -301,6 +308,7 @@ const styles = {
   },
 
   /* INSTALL BUTTON */
+
   installButton: {
     width: "100%",
     padding: "15px",
@@ -314,7 +322,8 @@ const styles = {
     marginBottom: "12px",
   },
 
-  /* LOGIN / WEBSITE */
+  /* WEBSITE BUTTON */
+
   loginButton: {
     width: "100%",
     padding: "15px",
@@ -328,35 +337,31 @@ const styles = {
   },
 
   /* INSTALLING */
+
   installingBox: {
     width: "100%",
-    marginBottom: "18px",
+    marginBottom: "20px",
   },
 
-  loadingCircle: {
-    width: "52px",
-    height: "52px",
+  spinner: {
+    width: "48px",
+    height: "48px",
+    margin: "0 auto 16px",
     borderRadius: "50%",
     border: "4px solid #e5e5e5",
     borderTop: "4px solid #111111",
-    margin: "0 auto 15px",
-    animation: "spin 1s linear infinite",
-  },
-
-  loadingDot: {
-    width: "100%",
-    height: "100%",
+    animation: "felloSpin 0.9s linear infinite",
   },
 
   installingTitle: {
     margin: "0 0 8px",
-    fontSize: "18px",
+    fontSize: "19px",
     fontWeight: "600",
     color: "#111111",
   },
 
   installingText: {
-    margin: "0 0 15px",
+    margin: "0 0 16px",
     fontSize: "13px",
     color: "#777777",
   },
@@ -367,31 +372,44 @@ const styles = {
     background: "#e5e5e5",
     borderRadius: "10px",
     overflow: "hidden",
+    position: "relative",
   },
 
-  progressBar: {
+  progressMoving: {
+    position: "absolute",
+    left: "-35%",
+    top: "0",
+    width: "35%",
     height: "100%",
     background: "#111111",
     borderRadius: "10px",
-    transition: "width 0.3s ease",
+    animation: "felloProgress 1.4s ease-in-out infinite",
+  },
+
+  progressComplete: {
+    width: "100%",
+    height: "100%",
+    background: "#111111",
+    borderRadius: "10px",
   },
 
   waitText: {
-    marginTop: "10px",
+    marginTop: "9px",
     fontSize: "13px",
     color: "#666666",
   },
 
   /* INSTALLED */
+
   installedBox: {
     width: "100%",
-    marginBottom: "18px",
+    marginBottom: "20px",
   },
 
   checkCircle: {
     width: "58px",
     height: "58px",
-    margin: "0 auto 12px",
+    margin: "0 auto 13px",
     borderRadius: "50%",
     background: "#111111",
     color: "#ffffff",
@@ -403,14 +421,14 @@ const styles = {
   },
 
   installedTitle: {
-    margin: "0 0 6px",
+    margin: "0 0 7px",
     fontSize: "19px",
     fontWeight: "700",
     color: "#111111",
   },
 
   installedText: {
-    margin: "0 0 15px",
+    margin: "0 0 16px",
     fontSize: "13px",
     color: "#777777",
   },
@@ -419,17 +437,19 @@ const styles = {
     margin: "8px 0 0",
     fontSize: "13px",
     color: "#666666",
+    fontWeight: "600",
   },
 
-  /* OPEN + CANCEL */
+  /* OPEN / CANCEL */
+
   actionButtons: {
     display: "flex",
     gap: "10px",
-    marginTop: "16px",
+    marginTop: "17px",
   },
 
   openButton: {
-    flex: 1,
+    flex: "1",
     padding: "14px",
     border: "none",
     borderRadius: "10px",
@@ -441,7 +461,7 @@ const styles = {
   },
 
   cancelButton: {
-    flex: 1,
+    flex: "1",
     padding: "14px",
     border: "1px solid #dddddd",
     borderRadius: "10px",
