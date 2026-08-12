@@ -14,13 +14,14 @@ function LiveStream() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const videoRef = useRef(null);
+  
   const localStreamRef = useRef(null);
   const socketRef = useRef(null);
-  const chatEndRef = useRef(null);
+  
   const timerRef = useRef(null);
 
   const [isLive, setIsLive] = useState(false);
+  const [localStream, setLocalStream] = useState(null);
   const [isStarting, setIsStarting] = useState(false);
   const [isEnding, setIsEnding] = useState(false);
 
@@ -42,6 +43,7 @@ function LiveStream() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [isFullscreen, setIsFullscreen] = useState(false);
+  
 
   const pathParts = location.pathname.split("/").filter(Boolean);
 
@@ -116,13 +118,10 @@ function LiveStream() {
 
       localStreamRef.current = stream;
 
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.muted = true;
-        await videoRef.current.play().catch(() => {});
-      }
+      localStreamRef.current = stream;
+setLocalStream(stream);
 
-      return stream;
+return stream;
     } catch (err) {
       console.error(err);
 
@@ -711,15 +710,22 @@ function LiveStream() {
       </div>
 
       <div className="live-main-content">
-        <div className="live-video-section">
-          <div className="live-video-wrapper">
-            <video
-              ref={videoRef}
-              className="live-video"
-              autoPlay
-              playsInline
-              muted
-            />
+        <LiveVideo
+  stream={localStream}
+  isLive={isLive}
+  cameraOn={cameraOn}
+  micOn={micOn}
+  username={username}
+  profilePic={profilePic}
+  viewerCount={viewerCount}
+  likeCount={likeCount}
+  liked={liked}
+  isViewer={isViewer}
+  onToggleCamera={toggleCamera}
+  onToggleMic={toggleMic}
+  onLike={likeLive}
+  onShare={shareLive}
+/>
 
             {!cameraOn && (
               <div className="camera-off-overlay">
@@ -827,11 +833,13 @@ function LiveStream() {
             </button>
           )}
         </div>
-        <div className="live-chat-section">
-          <div className="live-chat-header">
-            <h3>Live Chat</h3>
-            <span>{comments.length}</span>
-          </div>
+       <LiveChat
+  comments={comments}
+  commentText={commentText}
+  setCommentText={setCommentText}
+  onSendComment={sendComment}
+  currentUser={currentUser}
+/>
 
           <div className="live-comments">
             {comments.length === 0 ? (
