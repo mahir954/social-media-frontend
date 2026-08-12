@@ -61,7 +61,9 @@ function LiveStream() {
   const getUser = () => {
     try {
       return (
-        JSON.parse(localStorage.getItem("user")) ||
+        JSON.parse(
+          localStorage.getItem("user")
+        ) ||
         JSON.parse(
           localStorage.getItem("loggedInUser")
         )
@@ -92,10 +94,14 @@ function LiveStream() {
     "";
 
   const formatDuration = (seconds) => {
-    const hrs = Math.floor(seconds / 3600);
+    const hrs = Math.floor(
+      seconds / 3600
+    );
+
     const mins = Math.floor(
       (seconds % 3600) / 60
     );
+
     const secs = seconds % 60;
 
     if (hrs > 0) {
@@ -124,19 +130,31 @@ function LiveStream() {
     setError("");
 
     try {
+      if (
+        !navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia
+      ) {
+        setError(
+          "Camera access is not available."
+        );
+        return null;
+      }
+
       const stream =
-        await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: "user",
-            width: {
-              ideal: 1280,
+        await navigator.mediaDevices.getUserMedia(
+          {
+            video: {
+              facingMode: "user",
+              width: {
+                ideal: 1280,
+              },
+              height: {
+                ideal: 720,
+              },
             },
-            height: {
-              ideal: 720,
-            },
-          },
-          audio: true,
-        });
+            audio: true,
+          }
+        );
 
       localStreamRef.current = stream;
       setLocalStream(stream);
@@ -243,7 +261,102 @@ function LiveStream() {
 
     socket.on(
       "live-comment",
-      const startLive = async () => {
+      (comment) => {
+        if (!comment) return;
+
+        setComments((prev) => [
+          ...prev,
+          comment,
+        ]);
+      }
+    );
+
+    socket.on(
+      "new-live-comment",
+      (comment) => {
+        if (!comment) return;
+
+        setComments((prev) => [
+          ...prev,
+          comment,
+        ]);
+      }
+    );
+
+    socket.on(
+      "live-like",
+      (data) => {
+        if (
+          typeof data?.count ===
+          "number"
+        ) {
+          setLikeCount(
+            data.count
+          );
+        } else {
+          setLikeCount(
+            (prev) => prev + 1
+          );
+        }
+      }
+    );
+
+    socket.on(
+      "live-likes",
+      (data) => {
+        if (
+          typeof data?.count ===
+          "number"
+        ) {
+          setLikeCount(
+            data.count
+          );
+        }
+      }
+    );
+
+    socket.on(
+      "live-ended",
+      () => {
+        setIsLive(false);
+
+        stopTimer();
+        stopLocalStream();
+
+        setMessage(
+          "Live stream ended."
+        );
+
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      }
+    );
+
+    socket.on(
+      "stream-ended",
+      () => {
+        if (!isViewer) return;
+
+        setIsLive(false);
+
+        stopTimer();
+        stopLocalStream();
+
+        setMessage(
+          "This live stream has ended."
+        );
+
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      }
+    );
+
+    return socket;
+  };
+
+  const startLive = async () => {
     if (isStarting) return;
 
     setError("");
@@ -274,11 +387,13 @@ function LiveStream() {
         connectSocket();
 
       const newStreamId =
-        live_${userId || "user"}_${Date.now()};
+        `live_${userId || "user"}_${Date.now()}`;
 
       setStreamId(newStreamId);
       setTitle(cleanTitle);
+
       setIsLive(true);
+
       setDuration(0);
       setViewerCount(1);
       setLikeCount(0);
@@ -404,8 +519,345 @@ function LiveStream() {
     const stream =
       localStreamRef.current;
 
-    if (!stream)
-      useEffect(() => {
+    if (!stream) return;
+
+    const audioTracks =
+      stream.getAudioTracks();
+
+    if (!audioTracks.length) {
+      return;
+    }
+
+    const nextState =
+      !micOn;
+
+    audioTracks.forEach(
+      (track) => {
+        track.enabled =
+          nextState;
+      }
+    );
+
+    setMicOn(nextState);
+
+    socketRef.current?.emit(
+      "live-mic-toggle",
+      {
+        streamId,
+        userId,
+        micOn: nextState,
+      }
+    );
+  };
+
+  const sendComment = (e) => {
+    e?.preventDefault();
+
+    const text =
+      commentText.trim();
+
+    if (
+      !text ||
+      !streamId
+    ) {
+      return;
+    }
+
+    const comment = {
+      streamId,
+      userId,
+      username,
+      profilePic,
+      text,
+      createdAt:
+        new Date().toISOString(),
+    };
+
+    setComments((prev) => [
+      ...prev,
+      comment,
+    ]);
+
+    socketRef.current?.emit(
+      "live-comment",
+      comment
+    );
+
+    socketRef.current?.emit(
+      "send-live-comment",
+      comment
+    );
+
+    setCommentText("");
+  };
+
+  const likeLive = () => {
+    if (
+      liked ||
+      !streamId
+    ) {
+      return;
+    }
+
+    setLiked(true);
+
+    setLikeCount(
+      (prev) => prev + 1
+    );
+
+    socketRef.current?.emit(
+      "live-like",
+      {
+        streamId,
+        userId,
+        username,
+      }
+    );
+
+    socketRef.current?.emit(
+      "like-live",
+      {
+        streamId,
+        userId,
+      }
+    );
+  };
+
+  const shareLive = async () => {
+    if (!streamId) {
+      return;
+    }
+
+    const url =
+      `${window.location.origin}/live/${streamId}`;
+
+    try {
+      if (
+        navigator.share
+      ) {
+        await navigator.share({
+          title:
+            title ||
+            "Live Stream",
+          text:
+            `Join my live stream: ${
+              title ||
+              "Live Stream"
+            }`,
+          url,
+        });
+      } else {
+        await navigator.clipboard.writeText(
+          url
+        );
+
+        setMessage(
+          "Live link copied."
+        );
+
+        setTimeout(() => {
+          setMessage("");
+        }, 2000);
+      }
+    } catch {
+      console.log(
+        "Share cancelled"
+      );
+    }
+  };
+  const startTimer = () => {
+    clearInterval(timerRef.current);
+
+    timerRef.current = setInterval(() => {
+      setDuration((prev) => prev + 1);
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+  };
+
+  const stopLocalStream = () => {
+    if (localStreamRef.current) {
+      localStreamRef.current
+        .getTracks()
+        .forEach((track) => {
+          track.stop();
+        });
+
+      localStreamRef.current = null;
+    }
+
+    setLocalStream(null);
+  };
+
+  const endLive = async () => {
+    if (isEnding) return;
+
+    setIsEnding(true);
+
+    try {
+      if (
+        socketRef.current &&
+        streamId
+      ) {
+        socketRef.current.emit(
+          "end-live",
+          {
+            streamId,
+            userId,
+            username,
+          }
+        );
+
+        socketRef.current.emit(
+          "host-ended-live",
+          {
+            streamId,
+            userId,
+          }
+        );
+      }
+
+      stopTimer();
+      stopLocalStream();
+
+      setIsLive(false);
+
+      setMessage(
+        "Live stream ended successfully."
+      );
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1200);
+    } catch (err) {
+      console.error(
+        "End live error:",
+        err
+      );
+
+      setError(
+        "Live end karte time error aaya."
+      );
+    } finally {
+      setIsEnding(false);
+    }
+  };
+
+  const leaveLive = () => {
+    if (
+      socketRef.current &&
+      streamId
+    ) {
+      socketRef.current.emit(
+        "leave-live",
+        {
+          streamId,
+          userId,
+        }
+      );
+
+      socketRef.current.emit(
+        "leave-live-stream",
+        {
+          streamId,
+          userId,
+        }
+      );
+    }
+
+    stopTimer();
+    stopLocalStream();
+
+    setIsLive(false);
+
+    navigate(-1);
+  };
+
+  const fetchLiveInfo = async () => {
+    if (!viewerStreamId) {
+      return;
+    }
+
+    try {
+      const token =
+        localStorage.getItem(
+          "token"
+        );
+
+      const apiUrl =
+        import.meta.env
+          .VITE_API_URL ||
+        "http://localhost:5000";
+
+      const response =
+        await fetch(
+          `${apiUrl}/api/live/${viewerStreamId}`,
+          {
+            headers: token
+              ? {
+                  Authorization:
+                    `Bearer ${token}`,
+                }
+              : {},
+          }
+        );
+
+      if (!response.ok) {
+        throw new Error(
+          "Live stream not found"
+        );
+      }
+
+      const data =
+        await response.json();
+
+      const stream =
+        data?.stream || data;
+
+      if (stream) {
+        setTitle(
+          stream.title ||
+            "Live Stream"
+        );
+
+        setViewerCount(
+          typeof stream.viewerCount ===
+            "number"
+            ? stream.viewerCount
+            : 0
+        );
+
+        setLikeCount(
+          typeof stream.likeCount ===
+            "number"
+            ? stream.likeCount
+            : 0
+        );
+
+        setComments(
+          Array.isArray(
+            stream.comments
+          )
+            ? stream.comments
+            : []
+        );
+      }
+    } catch (err) {
+      console.log(
+        "Fetch live info error:",
+        err
+      );
+
+      setTitle(
+        "Live Stream"
+      );
+    }
+  };
+
+  useEffect(() => {
     connectSocket();
 
     return () => {
@@ -421,7 +873,10 @@ function LiveStream() {
   }, []);
 
   useEffect(() => {
-    if (!isViewer || !viewerStreamId) {
+    if (
+      !isViewer ||
+      !viewerStreamId
+    ) {
       return;
     }
 
@@ -432,14 +887,38 @@ function LiveStream() {
       socketRef.current?.emit(
         "leave-live",
         {
-          streamId: viewerStreamId,
+          streamId:
+            viewerStreamId,
           userId,
         }
       );
     };
   }, [viewerStreamId]);
 
-  if (!isLive && !isViewer) {
+  useEffect(() => {
+    const handleBeforeUnload =
+      () => {
+        stopTimer();
+        stopLocalStream();
+      };
+
+    window.addEventListener(
+      "beforeunload",
+      handleBeforeUnload
+    );
+
+    return () => {
+      window.removeEventListener(
+        "beforeunload",
+        handleBeforeUnload
+      );
+    };
+  }, []);
+
+  if (
+    !isLive &&
+    !isViewer
+  ) {
     return (
       <div className="live-page">
 
@@ -447,12 +926,16 @@ function LiveStream() {
 
           <button
             className="live-back-btn"
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              navigate(-1)
+            }
           >
             ←
           </button>
 
-          <h2>Go Live</h2>
+          <h2>
+            Go Live
+          </h2>
 
         </div>
 
@@ -467,8 +950,9 @@ function LiveStream() {
           </h1>
 
           <p>
-            Go live and connect with
-            your followers in real time.
+            Go live and connect
+            with your followers
+            in real time.
           </p>
 
           <div className="live-input-group">
@@ -513,12 +997,15 @@ function LiveStream() {
 
           <button
             className="live-cancel-button"
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              navigate(-1)
+            }
           >
             Cancel
           </button>
 
         </div>
+
       </div>
     );
   }
@@ -551,7 +1038,8 @@ function LiveStream() {
             </div>
 
             <div className="live-title-small">
-              {title || "Live Stream"}
+              {title ||
+                "Live Stream"}
             </div>
 
           </div>
@@ -565,7 +1053,9 @@ function LiveStream() {
           </span>
 
           <span className="live-duration">
-            {formatDuration(duration)}
+            {formatDuration(
+              duration
+            )}
           </span>
 
           <span className="live-viewers">
@@ -589,8 +1079,12 @@ function LiveStream() {
           likeCount={likeCount}
           liked={liked}
           isViewer={isViewer}
-          onToggleCamera={toggleCamera}
-          onToggleMic={toggleMic}
+          onToggleCamera={
+            toggleCamera
+          }
+          onToggleMic={
+            toggleMic
+          }
           onLike={likeLive}
           onShare={shareLive}
         />
@@ -598,9 +1092,15 @@ function LiveStream() {
         <LiveChat
           comments={comments}
           commentText={commentText}
-          setCommentText={setCommentText}
-          onSendComment={sendComment}
-          currentUser={currentUser}
+          setCommentText={
+            setCommentText
+          }
+          onSendComment={
+            sendComment
+          }
+          currentUser={
+            currentUser
+          }
         />
 
       </div>
