@@ -4,54 +4,43 @@ import { useNavigate } from "react-router-dom";
 function InstallPage() {
   const navigate = useNavigate();
 
-  const [installPrompt, setInstallPrompt] = useState(null);
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   useEffect(() => {
-    const handleBeforeInstallPrompt = (event) => {
+    const handleInstallPrompt = (event) => {
       event.preventDefault();
-      setInstallPrompt(event);
+      console.log("PWA install prompt available");
+      setDeferredPrompt(event);
     };
 
     window.addEventListener(
       "beforeinstallprompt",
-      handleBeforeInstallPrompt
+      handleInstallPrompt
     );
-
-    // Check if app is already installed
-    const checkInstalled = () => {
-      if (window.matchMedia("(display-mode: standalone)").matches) {
-        setIsInstalled(true);
-      }
-    };
-
-    checkInstalled();
 
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
-        handleBeforeInstallPrompt
+        handleInstallPrompt
       );
     };
   }, []);
 
-  const handleInstall = async () => {
-    if (!installPrompt) {
+  const installApp = async () => {
+    if (!deferredPrompt) {
       alert(
-        "Install option abhi available nahi hai. Chrome ke ⋮ menu se 'Install app' select karein."
+        "Install prompt browser ne provide nahi kiya. Chrome menu se Install app select karein."
       );
       return;
     }
 
-    installPrompt.prompt();
+    deferredPrompt.prompt();
 
-    const result = await installPrompt.userChoice;
+    const result = await deferredPrompt.userChoice;
 
-    if (result.outcome === "accepted") {
-      setIsInstalled(true);
-    }
+    console.log("Install result:", result.outcome);
 
-    setInstallPrompt(null);
+    setDeferredPrompt(null);
   };
 
   return (
@@ -70,14 +59,12 @@ function InstallPage() {
           Connect, Share & Chat with your friends
         </p>
 
-        {!isInstalled && (
-          <button
-            onClick={handleInstall}
-            style={styles.installButton}
-          >
-            📲 Install Fello Social
-          </button>
-        )}
+        <button
+          onClick={installApp}
+          style={styles.installButton}
+        >
+          📲 Install Fello Social
+        </button>
 
         <button
           onClick={() => navigate("/login")}
@@ -85,10 +72,6 @@ function InstallPage() {
         >
           Continue to Website
         </button>
-
-        <p style={styles.smallText}>
-          Install Fello Social for a better app experience.
-        </p>
 
       </div>
     </div>
@@ -126,7 +109,6 @@ const styles = {
   tagline: {
     color: "#666",
     marginBottom: "30px",
-    fontSize: "16px",
   },
 
   installButton: {
@@ -152,12 +134,6 @@ const styles = {
     fontSize: "16px",
     fontWeight: "600",
     cursor: "pointer",
-  },
-
-  smallText: {
-    marginTop: "18px",
-    fontSize: "13px",
-    color: "#888",
   },
 };
 
