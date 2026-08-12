@@ -1,1 +1,217 @@
+.live-page {
+  min-height: 100vh;
+  background: #0b0b0b;
+  color: #fff;
+  box-sizing: border-box;
+}
 
+.live-page *,
+.live-page *::before,
+.live-page *::after {
+  box-sizing: border-box;
+}
+
+.live-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 18px;
+  border-bottom: 1px solid #252525;
+  background: #111;
+}
+
+.live-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.live-back-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #222;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.live-start-card {
+  width: min(92%, 500px);
+  margin: 60px auto;
+  padding: 35px 25px;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.live-camera-icon {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #242424;
+  font-size: 34px;
+}
+
+.live-start-card h1 {
+  margin: 0 0 10px;
+  font-size: 25px;
+}
+
+.live-start-card p {
+  margin: 0 0 25px;
+  color: #aaa;
+  line-height: 1.5;
+}
+
+.live-input-group {
+  position: relative;
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.live-input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.live-input-group input {
+  width: 100%;
+  height: 48px;
+  padding: 0 50px 0 14px;
+  border: 1px solid #383838;
+  border-radius: 10px;
+  outline: none;
+  background: #0d0d0d;
+  color: #fff;
+  font-size: 15px;
+}
+
+.live-input-group input:focus {
+  border-color: #777;
+}
+
+.live-character-count {
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+  color: #777;
+  font-size: 12px;
+}
+
+.go-live-button,
+.live-cancel-button {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.go-live-button {
+  background: #e53935;
+  color: #fff;
+}
+
+.go-live-button:hover {
+  background: #c62828;
+}
+
+.go-live-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.live-cancel-button {
+  margin-top: 10px;
+  background: #272727;
+  color: #fff;
+}
+
+.live-error {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #351313;
+  color: #ff7777;
+  font-size: 14px;
+  text-align: center;
+}
+
+.live-success {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #12351c;
+  color: #72e890;
+  font-size: 14px;
+  text-align: center;
+}
+
+.live-active-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.live-top-bar {
+  min-height: 64px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  background: #111;
+  border-bottom: 1px solid #252525;
+}
+
+.live-host-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.live-profile-image,
+.live-profile-placeholder {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.live-profile-image {
+  object-fit: cover;
+}
+
+.live-profile-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+  color: #fff;
+  font-weight: 700;
+}
+
+.live-username {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.live-title-small {
+  max-width: 300px;
+  margin-top: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #999
