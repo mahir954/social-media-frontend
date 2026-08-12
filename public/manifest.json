@@ -3,10 +3,14 @@
   "short_name": "Fello",
   "description": "Fello Social Media App",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "orientation": "portrait",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
   "icons": [
     {
       "src": "/fello-icon.png.jpeg",
