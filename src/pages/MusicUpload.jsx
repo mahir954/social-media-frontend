@@ -42,6 +42,9 @@ function MusicUpload() {
         "https://social-media-backend-9fag.onrender.com/api/music/upload",
         {
           method: "POST",
+          headers: {
+      Authorization: Bearer ${localStorage.getItem("adminToken")},
+    },
           body: formData,
         }
       );
