@@ -27,6 +27,7 @@ import Note from "./components/Note";
 
 function App() {
   const token = localStorage.getItem("token");
+  const adminToken = localStorage.getItem("adminToken");
 
   return (
     <Routes>
@@ -174,9 +175,15 @@ function App() {
       {/* ================= MUSIC ================= */}
 
       <Route
-        path="/music-upload"
-        element={<MusicUpload />}
-      />
+  path="/music-upload"
+  element={
+    adminToken ? (
+      <MusicUpload />
+    ) : (
+      <Navigate to="/admin-login" replace />
+    )
+  }
+/>
 
       <Route
         path="/music-library"
