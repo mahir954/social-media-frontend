@@ -1,1 +1,18 @@
-
+{
+  "name": "Fello Social",
+  "short_name": "Fello",
+  "description": "Fello Social Media App",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/fello-icon.png.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
