@@ -134,7 +134,7 @@ function InstallPage() {
               <div
                 style={{
                   ...styles.progressBar,
-                  width: ${progress}%,
+                  width: `${progress}%`,
                 }}
               />
             </div>
