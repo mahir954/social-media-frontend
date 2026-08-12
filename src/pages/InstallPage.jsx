@@ -10,12 +10,15 @@ function InstallPage() {
   const [installed, setInstalled] = useState(false);
 
   useEffect(() => {
-    const handleBeforeInstallPrompt = (event) => {
+    const handleInstallPrompt = (event) => {
       event.preventDefault();
+      console.log("PWA install prompt available");
       setDeferredPrompt(event);
     };
 
     const handleAppInstalled = () => {
+      console.log("Fello Social installed successfully");
+
       setInstalled(true);
       setInstalling(false);
       setProgress(100);
@@ -24,13 +27,18 @@ function InstallPage() {
 
     window.addEventListener(
       "beforeinstallprompt",
-      handleBeforeInstallPrompt
+      handleInstallPrompt
     );
 
-    window.addEventListener("appinstalled", handleAppInstalled);
+    window.addEventListener(
+      "appinstalled",
+      handleAppInstalled
+    );
 
     // Check if already installed
-    if (window.matchMedia("(display-mode: standalone)").matches) {
+    if (
+      window.matchMedia("(display-mode: standalone)").matches
+    ) {
       setInstalled(true);
       setProgress(100);
     }
@@ -38,7 +46,7 @@ function InstallPage() {
     return () => {
       window.removeEventListener(
         "beforeinstallprompt",
-        handleBeforeInstallPrompt
+        handleInstallPrompt
       );
 
       window.removeEventListener(
@@ -51,7 +59,7 @@ function InstallPage() {
   const installApp = async () => {
     if (!deferredPrompt) {
       alert(
-        "Install prompt available nahi hai. Chrome ke ⋮ menu se 'Install app' select karein."
+        "Install prompt browser ne provide nahi kiya. Chrome menu se Install app select karein."
       );
       return;
     }
@@ -63,24 +71,27 @@ function InstallPage() {
 
     const result = await deferredPrompt.userChoice;
 
+    console.log("Install result:", result.outcome);
+
     if (result.outcome === "accepted") {
       setProgress(30);
 
       // Visual progress only.
-      // Actual installation progress Chrome provide nahi karta.
+      // Actual installation percentage Chrome provide nahi karta.
       let currentProgress = 30;
 
-      const progressTimer = setInterval(() => {
+      const timer = setInterval(() => {
         currentProgress += 5;
 
         if (currentProgress >= 95) {
           currentProgress = 95;
-          clearInterval(progressTimer);
+          clearInterval(timer);
         }
 
         setProgress(currentProgress);
       }, 250);
     } else {
+      // User pressed Cancel
       setInstalling(false);
       setProgress(0);
     }
@@ -100,37 +111,16 @@ function InstallPage() {
         />
 
         {/* App Name */}
-        <h1 style={styles.title}>Fello Social</h1>
+        <h1 style={styles.title}>
+          Fello Social
+        </h1>
 
         <p style={styles.tagline}>
           Connect, Share & Chat with your friends
         </p>
 
-        {/* Installing / Installed / Install */}
-        {installed ? (
-          <div style={styles.installedBox}>
-            <div style={styles.checkCircle}>✓</div>
-
-            <h3 style={styles.installedTitle}>
-              Fello Social Installed
-            </h3>
-
-            <p style={styles.installedText}>
-              Installation completed successfully.
-            </p>
-
-            <div style={styles.progressBackground}>
-              <div
-                style={{
-                  ...styles.progressBar,
-                  width: "100%",
-                }}
-              />
-            </div>
-
-            <p style={styles.progressText}>100%</p>
-          </div>
-        ) : installing ? (
+        {/* Installing */}
+        {installing && !installed && (
           <div style={styles.installingBox}>
             <h3 style={styles.installingTitle}>
               Installing Fello Social...
@@ -153,7 +143,40 @@ function InstallPage() {
               {progress}%
             </p>
           </div>
-        ) : (
+        )}
+
+        {/* Installed */}
+        {installed && (
+          <div style={styles.installedBox}>
+            <div style={styles.checkCircle}>
+              ✓
+            </div>
+
+            <h3 style={styles.installedTitle}>
+              Fello Social Installed
+            </h3>
+
+            <p style={styles.installedText}>
+              Installation completed successfully.
+            </p>
+
+            <div style={styles.progressBackground}>
+              <div
+                style={{
+                  ...styles.progressBar,
+                  width: "100%",
+                }}
+              />
+            </div>
+
+            <p style={styles.progressText}>
+              100%
+            </p>
+          </div>
+        )}
+
+        {/* Install Button */}
+        {!installing && !installed && (
           <button
             onClick={installApp}
             style={styles.installButton}
