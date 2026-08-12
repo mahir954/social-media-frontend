@@ -2,7 +2,7 @@ import Admin from "../admin/Admin";
 import AdminLogin from "../admin/AdminLogin";
 
 import { Routes, Route, Navigate } from "react-router-dom";
-import InstallPage from " ./pages/InstallPage";
+import InstallPage from "./pages/InstallPage";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
