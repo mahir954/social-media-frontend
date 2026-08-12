@@ -116,7 +116,7 @@ function LiveStream() {
         audio: true,
       });
 
-      localStreamRef.current = stream;
+      
 
       localStreamRef.current = stream;
 setLocalStream(stream);
