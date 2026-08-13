@@ -103,3 +103,73 @@
   --text-light: #666666;
   --border: #dddddd;
 }
+/* ================= GLOBAL THEME ================= */
+
+html,
+body,
+#root {
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Common elements */
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* Theme utility classes */
+
+.theme-bg {
+  background: var(--bg);
+}
+
+.theme-surface {
+  background: var(--surface);
+}
+
+.theme-text {
+  color: var(--text);
+}
+
+.theme-text-light {
+  color: var(--text-light);
+}
+
+.theme-border {
+  border-color: var(--border);
+}
+
+.theme-primary {
+  color: var(--primary);
+}
+
+.theme-primary-bg {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.theme-primary-light {
+  background: var(--primary-light);
+}
