@@ -58,15 +58,50 @@ const themes = [
     icon: "🤍",
     color: "#333333",
   },
+  {
+    id: "rose",
+    name: "Rose",
+    icon: "🌹",
+    color: "#e91e63",
+  },
+  {
+    id: "sky",
+    name: "Sky",
+    icon: "🌤️",
+    color: "#03a9f4",
+  },
+  {
+    id: "yellow",
+    name: "Yellow",
+    icon: "💛",
+    color: "#fbc02d",
+  },
+  {
+    id: "navy",
+    name: "Navy",
+    icon: "🔵",
+    color: "#283593",
+  },
+  {
+    id: "gray",
+    name: "Gray",
+    icon: "🩶",
+    color: "#607d8b",
+  },
+  {
+    id: "brown",
+    name: "Brown",
+    icon: "🤎",
+    color: "#795548",
+  },
 ];
 
 function Theme() {
   const navigate = useNavigate();
 
-  const [selectedTheme, setSelectedTheme] =
-    useState(
-      localStorage.getItem("appTheme") || "pink"
-    );
+  const [selectedTheme, setSelectedTheme] = useState(
+    localStorage.getItem("appTheme") || "pink"
+  );
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -103,8 +138,8 @@ function Theme() {
       <div className="theme-content">
 
         <p className="theme-description">
-          Choose your favorite theme for
-          the entire app.
+          Choose your favorite theme for the
+          entire app.
         </p>
 
         <div className="theme-grid">
@@ -136,8 +171,7 @@ function Theme() {
                 {theme.name}
               </span>
 
-              {selectedTheme ===
-                theme.id && (
+              {selectedTheme === theme.id && (
                 <div className="theme-check">
                   ✓
                 </div>
