@@ -25,6 +25,7 @@ import Reels from "./pages/Reels";
 
 import Note from "./components/Note";
 import LiveStream from "./pages/LiveStream";
+import Theme from "./pages/Theme";
 
 
 function App() {
@@ -141,6 +142,10 @@ function App() {
         path="/notifications"
         element={<Notifications />}
       />
+      <Route
+  path="/themes"
+  element={<Theme />}
+/>
 
 
       {/* ================= SETTINGS ================= */}
