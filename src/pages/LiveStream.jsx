@@ -437,7 +437,7 @@ const username =
         {
           streamId: newStreamId,
           userId,
-          username, liveUsername,
+          username: liveUsername,
           profilePic: liveProfilePic,
           title: cleanTitle,
         }
