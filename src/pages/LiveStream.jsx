@@ -37,7 +37,7 @@ function LiveStream() {
     liveUser?.avatar ||
     "";
 
-  const navigate = useNavigate();
+  
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -100,6 +100,13 @@ function LiveStream() {
   };
 
   const currentUser = getUser();
+  const userId = currentUser?._id || localStorage.getItem("userId");
+
+const username =
+  currentUser?.name ||
+  currentUser?.username ||
+  currentUser?.fullName ||
+  "User";
 
 
 
@@ -204,14 +211,7 @@ function LiveStream() {
       return null;
     }
   };
-  const getLiveUser = () => {
-  try {
-    return JSON.parse(localStorage.getItem("user")) || null;
-  } catch {
-    return null;
-  }
-};
-
+ 
   const connectSocket = () => {
     if (socketRef.current) {
       return socketRef.current;
@@ -436,8 +436,9 @@ function LiveStream() {
         "host-started-live",
         {
           streamId: newStreamId,
-          userId: liveUsername,
-          username, liveProfilePic,
+          userId: 
+          username, liveUsername,
+          profilePic: liveProfilePic,
           title: cleanTitle,
         }
       );
