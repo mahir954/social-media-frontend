@@ -425,7 +425,7 @@ const username =
           streamId: newStreamId,
           userId,
           username: liveUsername,
-          profilePic: liveProfilePic,
+          profilePic: liveprofilePic: liveProfilePic
           title: cleanTitle,
           startedAt:
             new Date().toISOString(),
@@ -438,7 +438,7 @@ const username =
           streamId: newStreamId,
           userId,
           username, liveUsername,
-          profilePic: liveProfilePic,
+          profilePic: liveprofilePic: liveProfilePic
           title: cleanTitle,
         }
       );
@@ -485,7 +485,7 @@ const username =
           viewerStreamId,
         userId,
         username,
-        profilePic: liveProfilePic,
+        profilePic: liveprofilePic: liveProfilePic
       }
     );
 
@@ -635,7 +635,7 @@ const username =
       streamId,
       userId,
       username,
-      profilePic: liveProfilePic,
+      profilePic: liveprofilePic: liveProfilePic
       text,
       createdAt:
         new Date().toISOString(),
