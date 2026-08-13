@@ -7,6 +7,13 @@ import "./styles/global.css";
 import "./styles/theme.css";
 
 import App from "./App.jsx";
+const savedTheme =
+  localStorage.getItem("appTheme") || "pink";
+
+document.documentElement.setAttribute(
+  "data-theme",
+  savedTheme
+);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
