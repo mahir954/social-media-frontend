@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { MdCameraswitch } from "react-icons/md";
 
 function LiveVideo({
   stream,
@@ -9,6 +10,7 @@ function LiveVideo({
   viewerCount = 0,
   onToggleCamera,
   onToggleMic,
+  onSwitchCamera,
   micOn = true,
   onLike,
   likeCount = 0,
@@ -177,6 +179,14 @@ function LiveVideo({
             </button>
           </>
         )}
+        <button
+  type="button"
+  className="live-control switch-camera-button"
+  onClick={onSwitchCamera}
+  title="Switch Camera"
+>
+  <MdCameraswitch />
+</button>
 
         <button
           type="button"
