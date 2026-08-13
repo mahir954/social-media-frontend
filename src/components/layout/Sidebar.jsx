@@ -39,6 +39,9 @@ function Sidebar() {
 </Link>
         </li>
         <li>
+          <Link to="/theme">🎨 Theme</Link>
+        </li>
+        <li>
           <Link to="/settings">⚙️Settings</Link>
         </li>
         <li>
