@@ -7,6 +7,7 @@
 
   --bg: #ffffff;
   --surface: #ffffff;
+
   --text: #222222;
   --text-light: #666666;
   --border: #eeeeee;
@@ -15,4 +16,90 @@
   --success: #2e7d32;
 
   --radius: 10px;
+}
+
+/* PINK */
+[data-theme="pink"] {
+  --primary: #e91e63;
+  --primary-dark: #c2185b;
+  --primary-light: #fce4ec;
+  --secondary: #ff4081;
+}
+
+/* BLUE */
+[data-theme="blue"] {
+  --primary: #2196f3;
+  --primary-dark: #1976d2;
+  --primary-light: #e3f2fd;
+  --secondary: #03a9f4;
+}
+
+/* PURPLE */
+[data-theme="purple"] {
+  --primary: #9c27b0;
+  --primary-dark: #7b1fa2;
+  --primary-light: #f3e5f5;
+  --secondary: #e040fb;
+}
+
+/* GREEN */
+[data-theme="green"] {
+  --primary: #4caf50;
+  --primary-dark: #388e3c;
+  --primary-light: #e8f5e9;
+  --secondary: #00c853;
+}
+
+/* ORANGE */
+[data-theme="orange"] {
+  --primary: #ff9800;
+  --primary-dark: #f57c00;
+  --primary-light: #fff3e0;
+  --secondary: #ff5722;
+}
+
+/* RED */
+[data-theme="red"] {
+  --primary: #f44336;
+  --primary-dark: #d32f2f;
+  --primary-light: #ffebee;
+  --secondary: #ff5252;
+}
+
+/* CYAN */
+[data-theme="cyan"] {
+  --primary: #00bcd4;
+  --primary-dark: #0097a7;
+  --primary-light: #e0f7fa;
+  --secondary: #00acc1;
+}
+
+/* DARK */
+[data-theme="dark"] {
+  --primary: #bb86fc;
+  --primary-dark: #9b59d0;
+  --primary-light: #2a2033;
+  --secondary: #03dac6;
+
+  --bg: #121212;
+  --surface: #1e1e1e;
+
+  --text: #ffffff;
+  --text-light: #bbbbbb;
+  --border: #333333;
+}
+
+/* LIGHT */
+[data-theme="light"] {
+  --primary: #333333;
+  --primary-dark: #111111;
+  --primary-light: #f5f5f5;
+  --secondary: #666666;
+
+  --bg: #ffffff;
+  --surface: #ffffff;
+
+  --text: #222222;
+  --text-light: #666666;
+  --border: #dddddd;
 }
