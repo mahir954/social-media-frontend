@@ -34,6 +34,7 @@ function Login() {
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.user._id);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       const savedAccounts =
         JSON.parse(localStorage.getItem("savedAccounts")) || [];
