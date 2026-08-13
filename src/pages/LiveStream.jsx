@@ -436,7 +436,7 @@ const username =
         "host-started-live",
         {
           streamId: newStreamId,
-          userId: userId,
+          userId,
           username, liveUsername,
           profilePic: liveProfilePic,
           title: cleanTitle,
@@ -485,7 +485,7 @@ const username =
           viewerStreamId,
         userId,
         username,
-        profilePic,
+        profilePic: liveProfilePic,
       }
     );
 
@@ -635,7 +635,7 @@ const username =
       streamId,
       userId,
       username,
-      profilePic,
+      profilePic: liveProfilePic,
       text,
       createdAt:
         new Date().toISOString(),
