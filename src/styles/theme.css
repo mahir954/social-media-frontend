@@ -2,79 +2,103 @@
   --primary: #e91e63;
   --primary-dark: #c2185b;
   --primary-light: #fce4ec;
-
   --secondary: #ff4081;
 
-  --bg: #ffffff;
+  --bg: #fff5f8;
   --surface: #ffffff;
-
   --text: #222222;
   --text-light: #666666;
-  --border: #eeeeee;
+  --border: #f3cbd8;
 
   --danger: #e53935;
   --success: #2e7d32;
-
   --radius: 10px;
 }
 
-/* PINK */
 [data-theme="pink"] {
   --primary: #e91e63;
   --primary-dark: #c2185b;
   --primary-light: #fce4ec;
   --secondary: #ff4081;
+  --bg: #fff5f8;
+  --surface: #ffffff;
+  --text: #222222;
+  --text-light: #666666;
+  --border: #f3cbd8;
 }
 
-/* BLUE */
 [data-theme="blue"] {
   --primary: #2196f3;
   --primary-dark: #1976d2;
   --primary-light: #e3f2fd;
   --secondary: #03a9f4;
+  --bg: #f3f9ff;
+  --surface: #ffffff;
+  --text: #17212b;
+  --text-light: #607080;
+  --border: #c9e3f8;
 }
 
-/* PURPLE */
 [data-theme="purple"] {
   --primary: #9c27b0;
   --primary-dark: #7b1fa2;
   --primary-light: #f3e5f5;
   --secondary: #e040fb;
+  --bg: #fbf5fc;
+  --surface: #ffffff;
+  --text: #27152b;
+  --text-light: #705875;
+  --border: #e5c9ea;
 }
 
-/* GREEN */
 [data-theme="green"] {
   --primary: #4caf50;
   --primary-dark: #388e3c;
   --primary-light: #e8f5e9;
   --secondary: #00c853;
+  --bg: #f4fbf5;
+  --surface: #ffffff;
+  --text: #17251a;
+  --text-light: #607064;
+  --border: #cce8d0;
 }
 
-/* ORANGE */
 [data-theme="orange"] {
   --primary: #ff9800;
   --primary-dark: #f57c00;
   --primary-light: #fff3e0;
   --secondary: #ff5722;
+  --bg: #fff9f2;
+  --surface: #ffffff;
+  --text: #2b2118;
+  --text-light: #746556;
+  --border: #f2d8bd;
 }
 
-/* RED */
 [data-theme="red"] {
   --primary: #f44336;
   --primary-dark: #d32f2f;
   --primary-light: #ffebee;
   --secondary: #ff5252;
+  --bg: #fff6f6;
+  --surface: #ffffff;
+  --text: #2b1818;
+  --text-light: #765f5f;
+  --border: #f0cccc;
 }
 
-/* CYAN */
 [data-theme="cyan"] {
   --primary: #00bcd4;
   --primary-dark: #0097a7;
   --primary-light: #e0f7fa;
   --secondary: #00acc1;
+  --bg: #f1fcfd;
+  --surface: #ffffff;
+  --text: #152629;
+  --text-light: #607477;
+  --border: #c7e9ed;
 }
 
-/* DARK */
 [data-theme="dark"] {
   --primary: #bb86fc;
   --primary-dark: #9b59d0;
@@ -83,13 +107,11 @@
 
   --bg: #121212;
   --surface: #1e1e1e;
-
   --text: #ffffff;
   --text-light: #bbbbbb;
   --border: #333333;
 }
 
-/* LIGHT */
 [data-theme="light"] {
   --primary: #333333;
   --primary-dark: #111111;
@@ -98,17 +120,16 @@
 
   --bg: #ffffff;
   --surface: #ffffff;
-
   --text: #222222;
   --text-light: #666666;
   --border: #dddddd;
 }
-/* ================= GLOBAL THEME ================= */
 
 html,
 body,
 #root {
-  background: var(--bg);
+  min-height: 100%;
+  background-color: var(--bg);
   color: var(--text);
   transition:
     background-color 0.25s ease,
@@ -123,8 +144,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Common elements */
-
 button,
 input,
 textarea,
@@ -138,8 +157,6 @@ button {
     color 0.25s ease,
     border-color 0.25s ease;
 }
-
-/* Theme utility classes */
 
 .theme-bg {
   background: var(--bg);
@@ -173,7 +190,6 @@ button {
 .theme-primary-light {
   background: var(--primary-light);
 }
-/* ================= APP-WIDE THEME ================= */
 
 body {
   background-color: var(--bg) !important;
@@ -219,23 +235,20 @@ textarea::placeholder {
   color: var(--text-light);
 }
 
-/* Primary buttons */
 button.primary,
 .primary-button,
 .go-live-button,
 .follow-button,
 .create-post-button {
   background-color: var(--primary);
-  color: #fff;
+  color: #ffffff;
 }
 
-/* Links / active elements */
 .active,
 .active-link {
   color: var(--primary);
 }
 
-/* Borders */
 .card,
 .post,
 .profile-card,
