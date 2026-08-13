@@ -44,7 +44,7 @@ function LiveStream() {
 
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-
+  const [cameraFacing, setCameraFacing] = useState("user");
   const pathParts = location.pathname
     .split("/")
     .filter(Boolean);
@@ -144,7 +144,7 @@ function LiveStream() {
         await navigator.mediaDevices.getUserMedia(
           {
             video: {
-              facingMode: "user",
+              facingMode: cameraFacing,
               width: {
                 ideal: 1280,
               },
@@ -514,6 +514,54 @@ function LiveStream() {
       }
     );
   };
+  const switchCamera = async () => {
+  const nextFacing =
+    cameraFacing === "user"
+      ? "environment"
+      : "user";
+
+  try {
+    const oldStream = localStreamRef.current;
+
+    const newStream =
+      await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: {
+            exact: nextFacing,
+          },
+          width: {
+            ideal: 1280,
+          },
+          height: {
+            ideal: 720,
+          },
+        },
+        audio: true,
+      });
+
+    if (oldStream) {
+      oldStream.getTracks().forEach((track) => {
+        track.stop();
+      });
+    }
+
+    localStreamRef.current = newStream;
+    setLocalStream(newStream);
+
+    setCameraFacing(nextFacing);
+    setCameraOn(true);
+    setMicOn(true);
+
+  } catch (error) {
+    console.error("Switch Camera Error:", error);
+
+    setError(
+      nextFacing === "environment"
+        ? "Back camera available nahi hai."
+        : "Front camera available nahi hai."
+    );
+  }
+};
 
   const toggleMic = () => {
     const stream =
@@ -1085,6 +1133,7 @@ function LiveStream() {
           onToggleMic={
             toggleMic
           }
+          onSwitchCamera={switchCamera}
           onLike={likeLive}
           onShare={shareLive}
         />
