@@ -1,7 +1,7 @@
 .navbar {
   height: 60px;
-  background-color: #1877f2;
-  color: white;
+  background-color: var(--primary);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,6 +12,7 @@
 .navbar h2 {
   margin: 0;
   font-size: 24px;
+  color: #fff;
 }
 
 .navbar-links {
@@ -21,17 +22,21 @@
 }
 
 .navbar-links a {
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
 }
 
 .navbar-links a:hover {
-  color: #e4e6eb;
+  color: var(--primary-light);
   text-decoration: underline;
 }
-/* user search input */
+
+.navbar-links button {
+  color: #fff;
+}
+
 .user-search {
   position: relative;
   margin-left: 20px;
@@ -49,38 +54,35 @@
   width: 100%;
   height: 40px;
   padding: 0 65px 0 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 22px;
   outline: none;
-  background: #fff;
-  color: #222;
-  -webkit-text-fill-color: #222;
-  caret-color: #1877f2;
+  background: var(--surface);
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--primary);
   font-size: 14px;
   box-sizing: border-box;
 }
 
 .search-input-wrapper input:focus {
-  background: white;
-  border-color: #1877f2;
-  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+  background: var(--surface);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
 }
-
-/* Search Icon */
 
 .search-icon {
   position: absolute;
   right: 40px;
-  left: auto;
   top: 50%;
   transform: translateY(-50%);
- font-size: 16px;
- z-index: 3;
- color: #777;
- cursor: pointer;
+  font-size: 16px;
+  z-index: 3;
+  color: var(--text-light);
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
-
-/* Clear Button */
 
 .clear-search {
   position: absolute;
@@ -89,7 +91,7 @@
   transform: translateY(-50%);
   border: none;
   background: transparent;
-  color: #777;
+  color: var(--text-light);
   cursor: pointer;
   font-size: 14px;
   z-index: 3;
@@ -97,40 +99,33 @@
 }
 
 .clear-search:hover {
-  color: #000;
+  color: var(--text);
 }
-
-/* =========================
-   SEARCH DROPDOWN
-========================= */
 
 .search-results {
   position: absolute;
   top: 48px;
   left: 0;
   width: 100%;
-  background: white;
+  background: var(--surface);
+  color: var(--text);
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  border: 1px solid #eee;
+  border: 1px solid var(--border);
   overflow: hidden;
   z-index: 1000;
   max-height: 350px;
   overflow-y: auto;
 }
 
-/* Search Results Heading */
-
 .search-title {
   padding: 12px 15px;
   font-size: 13px;
   font-weight: 600;
-  color: #777;
-  background: #fafafa;
-  border-bottom: 1px solid #eee;
+  color: var(--text-light);
+  background: var(--primary-light);
+  border-bottom: 1px solid var(--border);
 }
-
-/* User Result */
 
 .search-user {
   display: flex;
@@ -138,7 +133,8 @@
   padding: 11px 14px;
   cursor: pointer;
   transition: background 0.2s;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .search-user:last-child {
@@ -146,10 +142,8 @@
 }
 
 .search-user:hover {
-  background: #f5f8ff;
+  background: var(--primary-light);
 }
-
-/* User Profile Picture */
 
 .search-user img {
   width: 42px;
@@ -158,10 +152,8 @@
   border-radius: 50%;
   object-fit: cover;
   margin-right: 11px;
-  border: 2px solid #eee;
+  border: 2px solid var(--border);
 }
-
-/* User Name & Email */
 
 .search-user-info {
   display: flex;
@@ -172,7 +164,7 @@
 
 .search-user-info strong {
   font-size: 14px;
-  color: #222;
+  color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -180,30 +172,24 @@
 
 .search-user-info span {
   font-size: 12px;
-  color: #888;
+  color: var(--text-light);
   margin-top: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Arrow */
-
 .profile-arrow {
   font-size: 20px;
-  color: #aaa;
+  color: var(--text-light);
   margin-left: 8px;
   transition: 0.2s;
 }
 
 .search-user:hover .profile-arrow {
-  color: #1877f2;
+  color: var(--primary);
   transform: translateX(3px);
 }
-
-/* =========================
-   NO SEARCH RESULTS
-========================= */
 
 .no-search-results {
   display: flex;
@@ -212,7 +198,8 @@
   justify-content: center;
   text-align: center;
   padding: 25px 10px;
-  color: #888;
+  color: var(--text-light);
+  background: var(--surface);
 }
 
 .no-search-results span {
@@ -223,6 +210,7 @@
   margin: 8px 0 0;
   font-size: 14px;
 }
+
 .navbar-badge-link {
   position: relative;
   display: inline-flex;
@@ -237,8 +225,8 @@
   height: 18px;
   padding: 0 5px;
   border-radius: 50px;
-  background: red;
-  color: white;
+  background: var(--secondary);
+  color: #fff;
   font-size: 11px;
   font-weight: bold;
   display: flex;
@@ -246,7 +234,23 @@
   justify-content: center;
   line-height: 1;
 }
-/* mobile responsive */
+
+.navbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 5px;
+}
+
 @media (max-width: 600px) {
   .navbar {
     height: auto;
@@ -272,41 +276,16 @@
     font-size: 14px;
   }
 
-  /* Mobile search text fix */
   .search-input-wrapper input {
-    color: #222 !important;
-    -webkit-text-fill-color: #222 !important;
-    caret-color: #1877f2 !important;
-    background: #fff !important;
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
+    caret-color: var(--primary) !important;
+    background: var(--surface) !important;
     opacity: 1 !important;
   }
 }
-/* =========================
-   MOBILE MENU
-========================= */
-
-.navbar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  padding: 5px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
 
 @media (max-width: 768px) {
-
   .navbar {
     position: relative;
     flex-direction: column;
@@ -355,6 +334,4 @@
     width: 100%;
     box-sizing: border-box;
   }
-
 }
-
