@@ -143,7 +143,7 @@ function App() {
         element={<Notifications />}
       />
       <Route
-  path="/themes"
+  path="/theme"
   element={<Theme />}
 />
 
