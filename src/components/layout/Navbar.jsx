@@ -380,6 +380,7 @@ useEffect(() => {
             <span className="navbar-badge">{unreadNotifications}</span>
           )}
         </Link>
+        <Link to="/theme">🎨 Theme</Link>
 
         <Link to="/settings">⚙️Settings</Link>
 
