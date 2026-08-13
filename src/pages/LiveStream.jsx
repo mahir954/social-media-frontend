@@ -12,6 +12,32 @@ const SOCKET_URL =
   "http://localhost:5000";
 
 function LiveStream() {
+  const getLiveUser = () => {
+    try {
+      return (
+        JSON.parse(localStorage.getItem("user")) ||
+        JSON.parse(localStorage.getItem("loggedInUser"))
+      );
+    } catch {
+      return null;
+    }
+  };
+
+  const liveUser = getLiveUser();
+
+  const liveUsername =
+    liveUser?.name ||
+    liveUser?.username ||
+    liveUser?.fullName ||
+    "User";
+
+  const liveProfilePic =
+    liveUser?.profilePic ||
+    liveUser?.profileImage ||
+    liveUser?.avatar ||
+    "";
+
+  const navigate = useNavigate();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -75,37 +101,9 @@ function LiveStream() {
 
   const currentUser = getUser();
 
-const liveUser = getLiveUser();
 
-const liveUsername =
-  liveUser?.name ||
-  liveUser?.username ||
-  liveUser?.fullName ||
-  "User";
 
-const liveProfilePic =
-  liveUser?.profilePic ||
-  liveUser?.profileImage ||
-  liveUser?.avatar ||
-  "";
-
-const userId =
-  currentUser?._id ||
-  currentUser?.id ||
-  localStorage.getItem("userId") ||
-  null;
-
-  const username =
-    currentUser?.username ||
-    currentUser?.name ||
-    currentUser?.fullName ||
-    "User";
-
-  const profilePic =
-    currentUser?.profilePic ||
-    currentUser?.profileImage ||
-    currentUser?.avatar ||
-    "";
+  
 
   const formatDuration = (seconds) => {
     const hrs = Math.floor(
