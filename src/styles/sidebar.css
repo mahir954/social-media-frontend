@@ -1,9 +1,11 @@
 aside {
     width: 200px;
     min-height: calc(100vh - 60px);
-    background-color: white;
+    background-color: var(--surface);
+    color: var(--text);
     padding: 20px;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 aside ul li {
@@ -11,14 +13,16 @@ aside ul li {
     margin-bottom: 10px;
     border-radius: 8px;
     cursor: pointer;
+    color: var(--text);
+    background-color: transparent;
     transition: 0.3s;
 }
 
 aside ul li:hover {
-    background-color: #1877f2;
-    color: white;
+    background-color: var(--primary);
+    color: #ffffff;
 }
-/* Responsive Design */
+
 @media (max-width: 600px) {
     aside {
         width: 100%;
