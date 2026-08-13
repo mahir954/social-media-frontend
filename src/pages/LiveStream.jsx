@@ -75,11 +75,25 @@ function LiveStream() {
 
   const currentUser = getUser();
 
-  const userId =
-    currentUser?._id ||
-    currentUser?.id ||
-    localStorage.getItem("userId") ||
-    null;
+const liveUser = getLiveUser();
+
+const liveUsername =
+  liveUser?.name ||
+  liveUser?.username ||
+  liveUser?.fullName ||
+  "User";
+
+const liveProfilePic =
+  liveUser?.profilePic ||
+  liveUser?.profileImage ||
+  liveUser?.avatar ||
+  "";
+
+const userId =
+  currentUser?._id ||
+  currentUser?.id ||
+  localStorage.getItem("userId") ||
+  null;
 
   const username =
     currentUser?.username ||
@@ -192,6 +206,13 @@ function LiveStream() {
       return null;
     }
   };
+  const getLiveUser = () => {
+  try {
+    return JSON.parse(localStorage.getItem("user")) || null;
+  } catch {
+    return null;
+  }
+};
 
   const connectSocket = () => {
     if (socketRef.current) {
@@ -405,8 +426,8 @@ function LiveStream() {
         {
           streamId: newStreamId,
           userId,
-          username,
-          profilePic,
+          username: liveUsername,
+          profilePic: liveProfilePic,
           title: cleanTitle,
           startedAt:
             new Date().toISOString(),
@@ -417,8 +438,8 @@ function LiveStream() {
         "host-started-live",
         {
           streamId: newStreamId,
-          userId,
-          username,
+          userId: liveUsername,
+          username, liveProfilePic,
           title: cleanTitle,
         }
       );
@@ -1063,37 +1084,35 @@ function LiveStream() {
 
       <div className="live-top-bar">
 
-        <div className="live-host-info">
+       <div className="live-host-info">
 
-          {profilePic ? (
-            <img
-              src={profilePic}
-              alt={username}
-              className="live-profile-image"
-            />
-          ) : (
-            <div className="live-profile-placeholder">
-              {username
-                ?.charAt(0)
-                ?.toUpperCase()}
-            </div>
-          )}
+  {liveProfilePic ? (
+    <img
+      src={liveProfilePic}
+      alt={liveUsername}
+      className="live-profile-image"
+    />
+  ) : (
+    <div className="live-profile-placeholder">
+      {liveUsername
+        ?.charAt(0)
+        ?.toUpperCase()}
+    </div>
+  )}
 
-          <div>
+  <div>
 
-            <div className="live-username">
-              {username}
-            </div>
+    <div className="live-username">
+      {liveUsername}
+    </div>
 
-            <div className="live-title-small">
-              {title ||
-                "Live Stream"}
-            </div>
+    <div className="live-title-small">
+      {title || "Live Stream"}
+    </div>
 
-          </div>
+  </div>
 
-        </div>
-
+</div>
         <div className="live-status-area">
 
           <span className="live-badge">
