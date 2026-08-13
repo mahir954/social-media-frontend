@@ -436,7 +436,7 @@ const username =
         "host-started-live",
         {
           streamId: newStreamId,
-          userId: 
+          userId: userId,
           username, liveUsername,
           profilePic: liveProfilePic,
           title: cleanTitle,
