@@ -214,4 +214,11 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: #999
+  color: #999;
+}
+.switch-camera-button svg {
+  font-size: 23px;
+  width: 23px;
+  height: 23px;
+}
+  
