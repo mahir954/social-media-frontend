@@ -173,3 +173,72 @@ button {
 .theme-primary-light {
   background: var(--primary-light);
 }
+/* ================= APP-WIDE THEME ================= */
+
+body {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+.navbar,
+.sidebar,
+.home-content,
+.home-layout,
+.card,
+.post,
+.profile-card,
+.chat-container,
+.chat-box,
+.notifications-container,
+.explore-container,
+.reels-container,
+.settings-container {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.navbar a,
+.sidebar a {
+  color: var(--text);
+}
+
+button {
+  border-color: var(--border);
+}
+
+input,
+textarea,
+select {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-light);
+}
+
+/* Primary buttons */
+button.primary,
+.primary-button,
+.go-live-button,
+.follow-button,
+.create-post-button {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+/* Links / active elements */
+.active,
+.active-link {
+  color: var(--primary);
+}
+
+/* Borders */
+.card,
+.post,
+.profile-card,
+.chat-box {
+  border-color: var(--border);
+}
