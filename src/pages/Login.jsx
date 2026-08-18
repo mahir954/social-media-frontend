@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -19,8 +20,8 @@ function Login() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email,
-            password: password,
+            email,
+            password,
           }),
         }
       );
@@ -63,7 +64,6 @@ function Login() {
       console.log("Token saved successfully");
 
       navigate("/home");
-
     } catch (error) {
       console.error("Login Error:", error);
       alert("Server error");
@@ -102,7 +102,6 @@ function Login() {
       alert(
         `Password reset token generated:\n\n${data.resetToken}`
       );
-
     } catch (error) {
       console.error("Forgot Password Error:", error);
       alert(error.message);
@@ -110,74 +109,162 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="login-page">
+      <div className="login-background-shape shape-one"></div>
+      <div className="login-background-shape shape-two"></div>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+      <div className="login-container">
 
-        <br />
-        <br />
+        {/* LEFT SIDE */}
+        <div className="login-welcome">
+          <div className="welcome-content">
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+            <div className="welcome-logo">
+              <span>F</span>
+            </div>
 
-        <br />
-        <br />
+            <h1>Welcome Back!</h1>
 
-        <button type="submit">
-          Login
-        </button>
+            <p>
+              Connect with your friends, share your moments
+              and discover something new every day.
+            </p>
 
-        <button
-          type="button"
-          onClick={handleForgotPassword}
-          style={{
-            display: "block",
-            width: "100%",
-            marginTop: "15px",
-            padding: "10px",
-            background: "transparent",
-            border: "none",
-            color: "#1877f2",
-            cursor: "pointer",
-            fontWeight: "600",
-            fontSize: "14px",
-            textAlign: "center",
-          }}
-        >
-          Forgot Password?
-        </button>
+            <div className="welcome-features">
+              <div className="welcome-feature">
+                <div className="feature-icon">👥</div>
+                <div>
+                  <strong>Connect</strong>
+                  <span>Stay connected with people</span>
+                </div>
+              </div>
 
-        <button
-          type="button"
-          onClick={() => navigate("/register")}
-          style={{
-            display: "block",
-            width: "100%",
-            marginTop: "10px",
-            padding: "10px",
-            background: "#1877f2",
-            border: "none",
-            borderRadius: "5px",
-            color: "white",
-            cursor: "pointer",
-            fontWeight: "600",
-            fontSize: "14px",
-          }}
-        >
-          Create New Account
-        </button>
-      </form>
+              <div className="welcome-feature">
+                <div className="feature-icon">📸</div>
+                <div>
+                  <strong>Share</strong>
+                  <span>Share your favorite moments</span>
+                </div>
+              </div>
+
+              <div className="welcome-feature">
+                <div className="feature-icon">✨</div>
+                <div>
+                  <strong>Explore</strong>
+                  <span>Discover new content</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="login-card-wrapper">
+
+          <div className="login-card">
+
+            <div className="login-card-header">
+              <div className="mobile-logo">
+                <span>F</span>
+              </div>
+
+              <h2>Login</h2>
+
+              <p>
+                Welcome back! Please enter your details.
+              </p>
+            </div>
+
+            <form onSubmit={handleLogin}>
+
+              {/* EMAIL */}
+              <div className="login-input-group">
+                <label htmlFor="email">Email Address</label>
+
+                <div className="login-input-wrapper">
+                  <span className="input-icon">✉</span>
+
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* PASSWORD */}
+              <div className="login-input-group">
+                <label htmlFor="password">Password</label>
+
+                <div className="login-input-wrapper">
+                  <span className="input-icon">🔒</span>
+
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* FORGOT PASSWORD */}
+              <div className="login-options">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="forgot-password"
+                >
+                  Forgot Password?
+                </button>
+              </div>
+
+              {/* LOGIN BUTTON */}
+              <button
+                type="submit"
+                className="login-button"
+              >
+                <span>Login</span>
+                <span className="login-arrow">→</span>
+              </button>
+
+            </form>
+
+            {/* DIVIDER */}
+            <div className="login-divider">
+              <span>OR</span>
+            </div>
+
+            {/* REGISTER */}
+            <div className="register-section">
+              <p>Don't have an account?</p>
+
+              <button
+                type="button"
+                onClick={() => navigate("/register")}
+                className="create-account-button"
+              >
+                Create New Account
+              </button>
+            </div>
+
+            <div className="login-footer">
+              <span>© 2026 Fello</span>
+              <span>•</span>
+              <span>Connect. Share. Explore.</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
     </div>
   );
 }
